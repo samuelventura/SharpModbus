@@ -19,7 +19,7 @@ namespace SharpModbus
 
 		public void Dispose()
 		{
-			Closer.Close(serialPort);
+			Disposer.Dispose(serialPort);
 		}
 		
 		public void Write(byte[] data)

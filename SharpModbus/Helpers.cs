@@ -44,10 +44,10 @@ namespace SharpModbus
 		}
 	}
 	
-	static class Closer
+	static class Disposer
 	{
 		//SerialPort, Socket, TcpClient, Streams, Writers, Readers, ...
-		public static void Close(IDisposable closeable)
+		public static void Dispose(IDisposable closeable)
 		{
 			try {
 				if (closeable != null)
