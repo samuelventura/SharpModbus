@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+# SharpDevelop 5.1
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpModbus", "SharpModbus\SharpModbus.csproj", "{9682C3A4-4703-417C-B29C-D68AFBD97EC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpModbusTest", "SharpModbusTest\SharpModbusTest.csproj", "{A0C3A91A-92B8-42DD-8E89-3CF8ECA79B1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9682C3A4-4703-417C-B29C-D68AFBD97EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9682C3A4-4703-417C-B29C-D68AFBD97EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9682C3A4-4703-417C-B29C-D68AFBD97EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9682C3A4-4703-417C-B29C-D68AFBD97EC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C3A91A-92B8-42DD-8E89-3CF8ECA79B1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C3A91A-92B8-42DD-8E89-3CF8ECA79B1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C3A91A-92B8-42DD-8E89-3CF8ECA79B1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C3A91A-92B8-42DD-8E89-3CF8ECA79B1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

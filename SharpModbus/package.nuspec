@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>SharpModbus</id>
+		<version>1.0.2.0</version>
+		<authors>Samuel Ventura</authors>
+		<description>C# Modbus Tools</description>
+		<projectUrl>https://github.com/samuelventura/SharpModbus</projectUrl>
+		<licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+	</metadata>
+	<files>
+		<file src="bin\Release\SharpModbus.dll" target="lib\net40\SharpModbus.dll" />
+	</files>
+</package>
