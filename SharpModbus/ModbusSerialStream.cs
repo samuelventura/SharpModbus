@@ -4,12 +4,12 @@ using System.IO.Ports;
 
 namespace SharpModbus
 {
-	public class SerialModbusStream : IModbusStream, IDisposable
+	public class ModbusSerialStream : IModbusStream, IDisposable
 	{
 		private readonly SerialPort serialPort;
 		private readonly Action<char, byte[], int> monitor;
 		
-		public SerialModbusStream(SerialPort serialPort, int timeout, Action<char, byte[], int> monitor = null)
+		public ModbusSerialStream(SerialPort serialPort, int timeout, Action<char, byte[], int> monitor = null)
 		{
 			serialPort.ReadTimeout = timeout;
 			serialPort.WriteTimeout = timeout;

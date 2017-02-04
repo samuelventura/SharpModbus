@@ -44,9 +44,11 @@
   <ItemGroup>
     <Compile Include="Helpers.cs" />
     <Compile Include="IModbusProtocol.cs" />
+    <Compile Include="IModbusScanner.cs" />
     <Compile Include="IModbusStream.cs" />
+    <Compile Include="IModbusWrapper.cs" />
     <Compile Include="ModbusF02ReadInputs.cs" />
-    <Compile Include="ModbusCommand.cs" />
+    <Compile Include="IModbusCommand.cs" />
     <Compile Include="ModbusF01ReadCoils.cs" />
     <Compile Include="ModbusF03ReadHoldingRegisters.cs" />
     <Compile Include="ModbusF04ReadInputRegisters.cs" />
@@ -56,13 +58,16 @@
     <Compile Include="ModbusF16WriteRegisters.cs" />
     <Compile Include="ModbusHelper.cs" />
     <Compile Include="ModbusMaster.cs" />
+    <Compile Include="ModbusParser.cs" />
+    <Compile Include="ModbusRTUScanner.cs" />
     <Compile Include="ModbusRTUWrapper.cs" />
+    <Compile Include="ModbusTCPScanner.cs" />
     <Compile Include="ModbusTCPWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RtuModbusProtocol.cs" />
-    <Compile Include="SerialModbusStream.cs" />
-    <Compile Include="SocketModbusStream.cs" />
-    <Compile Include="TcpModbusProtocol.cs" />
+    <Compile Include="ModbusRTUProtocol.cs" />
+    <Compile Include="ModbusSerialStream.cs" />
+    <Compile Include="ModbusSocketStream.cs" />
+    <Compile Include="ModbusTCPProtocol.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.nuspec" />

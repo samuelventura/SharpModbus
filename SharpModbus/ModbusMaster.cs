@@ -78,7 +78,7 @@ namespace SharpModbus
 			Execute(new ModbusF16WriteRegisters(slave, address, values));
 		}
 		
-		private object Execute(ModbusCommand cmd)
+		private object Execute(IModbusCommand cmd)
 		{
 			var wrapper = protocol.Wrap(cmd);
 			var request = new byte[wrapper.RequestLength];

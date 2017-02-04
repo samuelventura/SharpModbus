@@ -25,6 +25,11 @@ namespace SharpModbus
 			return (byte)(value ? 0xFF : 0x00);
 		}
 		
+		public static bool DecodeBool(byte value)
+		{
+			return (value!=0x00);
+		}
+		
 		public static byte[] EncodeBools(bool[] bools)
 		{
 			var count = BytesForBools(bools.Length);
@@ -110,6 +115,15 @@ namespace SharpModbus
 			bytes[offset + 1] = (byte)((value >> 0) & 0xff);
 		}
 		*/
+		
+		public static ushort GetUShort(byte bh, byte bl)
+		{
+			return (ushort)(
+			    ((bh << 8) & 0xFF00)
+			    | (bl & 0xff)
+			);
+		}
+		
 		public static ushort GetUShort(byte[] bytes, int offset)
 		{
 			return (ushort)(

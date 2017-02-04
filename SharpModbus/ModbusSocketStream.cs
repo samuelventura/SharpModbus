@@ -4,12 +4,12 @@ using System.Net.Sockets;
 
 namespace SharpModbus
 {
-	public class SocketModbusStream : IModbusStream, IDisposable
+	public class ModbusSocketStream : IModbusStream, IDisposable
 	{
 		private readonly TcpClient socket;
 		private readonly Action<char, byte[], int> monitor;
 	
-		public SocketModbusStream(TcpClient socket, int timeout, Action<char, byte[], int> monitor = null)
+		public ModbusSocketStream(TcpClient socket, int timeout, Action<char, byte[], int> monitor = null)
 		{
 			socket.ReceiveTimeout = timeout;
 			socket.SendTimeout = timeout;

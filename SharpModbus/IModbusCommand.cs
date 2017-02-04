@@ -3,7 +3,7 @@ using System;
 
 namespace SharpModbus
 {
-	public interface ModbusCommand
+	public interface IModbusCommand
 	{
 		int RequestLength { get; }
 		int ResponseLength { get; }

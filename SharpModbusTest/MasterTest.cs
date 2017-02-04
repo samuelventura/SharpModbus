@@ -29,8 +29,8 @@ namespace SharpModbusTest
 			// m2.1 = m3.1
 			// m2.2 = m3.2
 			var socket = new TcpClient("10.77.0.2", 502);
-			var stream = new SocketModbusStream(socket, 400);
-			var protocol = new TcpModbusProtocol();
+			var stream = new ModbusSocketStream(socket, 400);
+			var protocol = new ModbusTCPProtocol();
 			var master = new ModbusMaster(stream, protocol);
 			
 			master.WriteCoils(1, 4, Bools(4, false)); //clear module

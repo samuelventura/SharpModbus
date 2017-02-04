@@ -2,17 +2,17 @@
 
 namespace SharpModbus
 {
-	public class ModbusTCPWrapper : ModbusCommand
+	public class ModbusTCPWrapper : IModbusWrapper
 	{
-		private readonly ModbusCommand wrapped;
+		private readonly IModbusCommand wrapped;
 		private readonly int transactionId;
 		
-		public ModbusCommand Wrapped { get { return wrapped; } }
+		public IModbusCommand Wrapped { get { return wrapped; } }
 		public int TransactionId { get { return transactionId; } }
 		public int RequestLength { get { return wrapped.RequestLength + 6; } }
 		public int ResponseLength { get { return wrapped.ResponseLength + 6; } }
 		
-		public ModbusTCPWrapper(ModbusCommand wrapped, int transactionId)
+		public ModbusTCPWrapper(IModbusCommand wrapped, int transactionId)
 		{
 			this.wrapped = wrapped;
 			this.transactionId = transactionId;
@@ -35,6 +35,11 @@ namespace SharpModbus
 			Assert.Equal(ModbusHelper.GetUShort(response, offset + 2), 0, "Zero mismatch {0} {1}");
 			Assert.Equal(ModbusHelper.GetUShort(response, offset + 4), wrapped.ResponseLength, "Length mismatch {0} {1}");
 			return wrapped.ParseResponse(response, offset + 6);
+		}
+		
+		public override string ToString()
+		{
+			return string.Format("[ModbusTCPWrapper Wrapped={0}, TransactionId={1}]", wrapped, transactionId);
 		}
 	}
 }

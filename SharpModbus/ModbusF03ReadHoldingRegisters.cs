@@ -2,7 +2,7 @@
 
 namespace SharpModbus
 {
-	public class ModbusF03ReadHoldingRegisters : ModbusCommand
+	public class ModbusF03ReadHoldingRegisters : IModbusCommand
 	{
 		private readonly byte slave;
 		private readonly ushort address;
@@ -38,6 +38,11 @@ namespace SharpModbus
 			Assert.Equal(response[offset + 1], 3, "Function mismatch {0} expected:{1}");
 			Assert.Equal(response[offset + 2], bytes, "Bytes mismatch {0} expected:{1}");
 			return ModbusHelper.DecodeWords(response, offset + 3, count);
+		}
+		
+		public override string ToString()
+		{
+			return string.Format("[ModbusF03ReadHoldingRegisters Slave={0}, Address={1}, Count={2}]", slave, address, count);
 		}
 	}
 }

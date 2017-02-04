@@ -2,7 +2,7 @@
 
 namespace SharpModbus
 {
-	public class ModbusF06WriteRegister : ModbusCommand
+	public class ModbusF06WriteRegister : IModbusCommand
 	{
 		private readonly byte slave;
 		private readonly ushort address;
@@ -38,6 +38,11 @@ namespace SharpModbus
 			Assert.Equal(ModbusHelper.GetUShort(response, offset + 2), address, "Address mismatch {0} expected:{1}");
 			Assert.Equal(ModbusHelper.GetUShort(response, offset + 4), value, "Value mismatch {0} expected:{1}");
 			return null;
+		}
+		
+		public override string ToString()
+		{
+			return string.Format("[ModbusF06WriteRegister Slave={0}, Address={1}, Value={2}]", slave, address, value);
 		}
 	}
 }

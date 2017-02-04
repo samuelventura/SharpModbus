@@ -2,7 +2,7 @@
 
 namespace SharpModbus
 {
-	public class ModbusF05WriteCoil : ModbusCommand
+	public class ModbusF05WriteCoil : IModbusCommand
 	{
 		private readonly byte slave;
 		private readonly ushort address;
@@ -39,6 +39,11 @@ namespace SharpModbus
 			Assert.Equal(response[offset + 4], ModbusHelper.EncodeBool(value), "Value mismatch {0} expected:{1}");
 			Assert.Equal(response[offset + 5], 0, "Pad mismatch {0} expected:{1}");
 			return null;
+		}
+		
+		public override string ToString()
+		{
+			return string.Format("[ModbusF05WriteCoil Slave={0}, Address={1}, Value={2}]", slave, address, value);
 		}
 	}
 }
