@@ -21,6 +21,11 @@ namespace SharpModbus
 			return (ushort)((crc >> 8) & 0x00ff | (crc << 8) & 0xff00);
 		}
 		
+		public static byte EncodeBool(bool value)
+		{
+			return (byte)(value ? 0xFF : 0x00);
+		}
+		
 		public static byte[] EncodeBools(bool[] bools)
 		{
 			var count = BytesForBools(bools.Length);
@@ -52,6 +57,34 @@ namespace SharpModbus
 			return bytes;
 		}
 		
+		public static bool[] DecodeBools(byte[] packet, int offset, ushort count)
+		{
+			var bools = new bool[count];
+			var bytes = BytesForBools(count);
+			for (var i = 0; i < bytes; i++) {
+				var bits = count >= 8 ? 8 : count % 8;
+				var b = packet[offset + i];
+				ByteToBools(b, bools, bools.Length - count, bits);
+				count -= (ushort)bits;
+			}
+			return bools;
+		}
+		
+		public static ushort[] DecodeWords(byte[] packet, int offset, ushort count)
+		{
+			var results = new ushort[count];
+			for (int i = 0; i < count; i++) {
+				results[i] = (ushort)(packet[offset + 2 * i] << 8 | packet[offset + 2 * i + 1]);
+			}
+			return results;
+		}
+		
+		private static void ByteToBools(byte b, bool[] bools, int offset, int count)
+		{
+			for (int i = 0; i < count; i++)
+				bools[offset + i] = ((b >> i) & 0x01) == 1;
+		}
+		
 		public static ushort BytesForWords(int count)
 		{
 			return (ushort)(2 * count);
@@ -77,14 +110,14 @@ namespace SharpModbus
 			bytes[offset + 0] = (byte)((value >> 8) & 0xff);
 			bytes[offset + 1] = (byte)((value >> 0) & 0xff);
 		}
-		
+		*/
 		public static ushort GetUShort(byte[] bytes, int offset)
 		{
 			return (ushort)(
 			    ((bytes[offset + 0] << 8) & 0xFF00)
 			    | (bytes[offset + 1] & 0xff)
 			);
-		}*/
+		}
 		
 		public static void Copy(byte[] src, int srcOffset, byte[] dst, int dstOffset, int count)
 		{

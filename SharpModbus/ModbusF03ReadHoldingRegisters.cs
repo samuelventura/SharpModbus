@@ -25,11 +25,20 @@ namespace SharpModbus
 		public void FillRequest(byte[] request, int offset)
 		{
 			request[offset + 0] = slave;
-			request[offset + 1] = 03;
+			request[offset + 1] = 3;
 			request[offset + 2] = ModbusHelper.High(address);
 			request[offset + 3] = ModbusHelper.Low(address);
 			request[offset + 4] = ModbusHelper.High(count);
 			request[offset + 5] = ModbusHelper.Low(count);
+		}
+		
+		public object ParseResponse(byte[] request, byte[] response, int offset)
+		{
+			var bytes = ModbusHelper.BytesForWords(count);
+			Assert.Equal(response[offset + 0], slave, "Slave mismatch {0} expected:{1}");
+			Assert.Equal(response[offset + 1], 1, "Function mismatch {0} expected:{1}");
+			Assert.Equal(response[offset + 2], bytes, "Bytes mismatch {0} expected:{1}");
+			return ModbusHelper.DecodeWords(response, offset + 3, count);
 		}
 	}
 }

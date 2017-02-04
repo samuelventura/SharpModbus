@@ -49,7 +49,9 @@
     <Compile Include="ModbusCommand.cs" />
     <Compile Include="ModbusF01ReadCoils.cs" />
     <Compile Include="ModbusF03ReadHoldingRegisters.cs" />
-    <Compile Include="ModbusF04ReadInputRegisters.cs" />
+    <Compile Include="ModbusF04ReadInputRegisters.cs">
+      <DependentUpon>ModbusF05WriteCoil.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModbusF05WriteCoil.cs" />
     <Compile Include="ModbusF06WriteRegister.cs" />
     <Compile Include="ModbusF15WriteCoils.cs" />

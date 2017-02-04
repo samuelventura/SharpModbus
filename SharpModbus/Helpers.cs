@@ -3,7 +3,7 @@ using System.Net.Sockets;
 
 namespace SharpModbus
 {
-	public static class TcpTools
+	static class TcpTools
 	{
 		public static TcpClient ConnectWithTimeout(string host, int port, int timeout)
 		{
@@ -25,19 +25,7 @@ namespace SharpModbus
 				throw new Exception(string.Format(format, a, b));
 		}
 		
-		public static void Equal(ushort a, ushort b, string format)
-		{
-			if (a != b)
-				throw new Exception(string.Format(format, a, b));
-		}
-		
-		public static void Equal(byte a, byte b, string format)
-		{
-			if (a != b)
-				throw new Exception(string.Format(format, a, b));
-		}
-		
-		public static void Equal(byte a, byte b, int i, string format)
+		public static void Equal(int a, int b, int i, string format)
 		{
 			if (a != b)
 				throw new Exception(string.Format(format, a, b, i));

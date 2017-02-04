@@ -28,8 +28,18 @@ namespace SharpModbus
 			request[offset + 1] = 5;
 			request[offset + 2] = ModbusHelper.High(address);
 			request[offset + 3] = ModbusHelper.Low(address);
-			request[offset + 4] = (byte)(value ? 0xFF : 0x00);
+			request[offset + 4] = ModbusHelper.EncodeBool(value);
 			request[offset + 5] = 0;			
+		}
+		
+		public object ParseResponse(byte[] request, byte[] response, int offset)
+		{
+			Assert.Equal(response[offset + 0], slave, "Slave mismatch {0} expected:{1}");
+			Assert.Equal(response[offset + 1], 5, "Function mismatch {0} expected:{1}");
+			Assert.Equal(ModbusHelper.GetUShort(response, offset + 2), address, "Address mismatch {0} expected:{1}");
+			Assert.Equal(response[offset + 4], ModbusHelper.EncodeBool(value), "Value mismatch {0} expected:{1}");
+			Assert.Equal(response[offset + 5], 0, "Pad mismatch {0} expected:{1}");
+			return null;
 		}
 	}
 }

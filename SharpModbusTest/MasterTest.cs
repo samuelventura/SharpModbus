@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Sockets;
 using System.Threading;
 using NUnit.Framework;
 using SharpModbus;
@@ -8,18 +9,6 @@ namespace SharpModbusTest
 	[TestFixture]
 	public class MasterTest
 	{
-		[Test]
-		public void ConnectTimeoutTest()
-		{
-			var dl = DateTime.Now.AddMilliseconds(600);
-			try {
-				var socket = TcpTools.ConnectWithTimeout("10.99.99.99", 501, 400);
-				Assert.Fail("Timeout expected");
-			} catch (Exception) {
-			}
-			Assert.Less(DateTime.Now, dl);
-		}
-		
 		private bool[] Bools(int count, bool value)
 		{
 			var bools = new bool[count];
@@ -39,7 +28,7 @@ namespace SharpModbusTest
 			// m0.3 = m1.3
 			// m2.1 = m3.1
 			// m2.2 = m3.2
-			var socket = TcpTools.ConnectWithTimeout("10.77.0.2", 502, 400);
+			var socket = new TcpClient("10.77.0.2", 502);
 			var stream = new SocketModbusStream(socket, 400);
 			var protocol = new TcpModbusProtocol(stream);
 			var master = new ModbusMaster(protocol);
