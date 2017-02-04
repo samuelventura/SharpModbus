@@ -2,8 +2,8 @@
 
 namespace SharpModbus
 {
-	public interface IModbusProtocol : IDisposable
+	public interface IModbusProtocol
 	{
-		byte[] Query(byte[] request, ushort length);
+		ModbusCommand Wrap(ModbusCommand wrapped);
 	}
 }

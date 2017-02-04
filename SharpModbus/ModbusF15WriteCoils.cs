@@ -34,7 +34,7 @@ namespace SharpModbus
 			ModbusHelper.Copy(bytes, 0, request, offset + 7, bytes.Length);
 		}
 		
-		public object ParseResponse(byte[] request, byte[] response, int offset)
+		public object ParseResponse(byte[] response, int offset)
 		{
 			Assert.Equal(response[offset + 0], slave, "Slave mismatch {0} expected:{1}");
 			Assert.Equal(response[offset + 1], 15, "Function mismatch {0} expected:{1}");

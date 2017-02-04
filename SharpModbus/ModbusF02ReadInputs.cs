@@ -31,11 +31,11 @@ namespace SharpModbus
 			request[offset + 5] = ModbusHelper.Low(count);			
 		}
 		
-		public object ParseResponse(byte[] request, byte[] response, int offset)
+		public object ParseResponse(byte[] response, int offset)
 		{
 			var bytes = ModbusHelper.BytesForBools(count);
 			Assert.Equal(response[offset + 0], slave, "Slave mismatch {0} expected:{1}");
-			Assert.Equal(response[offset + 1], 1, "Function mismatch {0} expected:{1}");
+			Assert.Equal(response[offset + 1], 2, "Function mismatch {0} expected:{1}");
 			Assert.Equal(response[offset + 2], bytes, "Bytes mismatch {0} expected:{1}");
 			return ModbusHelper.DecodeBools(response, offset + 3, count);
 		}

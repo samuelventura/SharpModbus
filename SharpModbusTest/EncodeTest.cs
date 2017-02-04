@@ -10,8 +10,8 @@ namespace SharpModbusTest
 		[Test]
 		public void DecodeBoolsTest()
 		{
-			Assert.AreEqual(new bool[]{ }, ModbusMaster.DecodeBools(new byte[]{ 0x00 }, 1, 0));
-			Assert.AreEqual(new bool[]{ true, false, true }, ModbusMaster.DecodeBools(new byte[] {
+			Assert.AreEqual(new bool[]{ }, ModbusHelper.DecodeBools(new byte[]{ 0x00 }, 1, 0));
+			Assert.AreEqual(new bool[]{ true, false, true }, ModbusHelper.DecodeBools(new byte[] {
 				0x00,
 				0x05
 			}, 1, 3));
@@ -26,7 +26,7 @@ namespace SharpModbusTest
 				false,
 				false,
 				true
-			}, ModbusMaster.DecodeBools(new byte[] {
+			}, ModbusHelper.DecodeBools(new byte[] {
 				0x00,
 				0x05,
 				0x02
@@ -36,20 +36,20 @@ namespace SharpModbusTest
 		[Test]
 		public void EncodeBoolsTest()
 		{
-			Assert.AreEqual(new byte[]{ }, ModbusMaster.EncodeBools(new bool[]{ }));
-			Assert.AreEqual(new byte[]{ 0x01 }, ModbusMaster.EncodeBools(new bool[]{ true }));
-			Assert.AreEqual(new byte[]{ 0x03 }, ModbusMaster.EncodeBools(new bool[] {
+			Assert.AreEqual(new byte[]{ }, ModbusHelper.EncodeBools(new bool[]{ }));
+			Assert.AreEqual(new byte[]{ 0x01 }, ModbusHelper.EncodeBools(new bool[]{ true }));
+			Assert.AreEqual(new byte[]{ 0x03 }, ModbusHelper.EncodeBools(new bool[] {
 				true,
 				true
 			}));
-			Assert.AreEqual(new byte[]{ 0x13 }, ModbusMaster.EncodeBools(new bool[] {
+			Assert.AreEqual(new byte[]{ 0x13 }, ModbusHelper.EncodeBools(new bool[] {
 				true,
 				true,
 				false,
 				false,
 				true
 			}));
-			Assert.AreEqual(new byte[]{ 0x13, 0x05 }, ModbusMaster.EncodeBools(new bool[] {
+			Assert.AreEqual(new byte[]{ 0x13, 0x05 }, ModbusHelper.EncodeBools(new bool[] {
 				true,
 				true,
 				false,

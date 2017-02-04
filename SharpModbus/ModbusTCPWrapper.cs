@@ -29,13 +29,12 @@ namespace SharpModbus
 			wrapped.FillRequest(request, offset + 6);
 		}
 		
-		public object ParseResponse(byte[] request, byte[] response, int offset)
+		public object ParseResponse(byte[] response, int offset)
 		{
-			for (var i = 0; i < 4; i++)
-				Assert.Equal(request[i], response[i], i, "Header mismatch {0}!={1} at pos:{2}");
-			var declaredLength = ModbusHelper.GetUShort(response, offset + 4);
-			Assert.Equal(declaredLength, wrapped.ResponseLength, "Length mismatch {0} {1}");
-			return wrapped.ParseResponse(request, response, offset + 6);
+			Assert.Equal(ModbusHelper.GetUShort(response, offset + 0), transactionId, "TransactionId mismatch {0} {1}");
+			Assert.Equal(ModbusHelper.GetUShort(response, offset + 2), 0, "Zero mismatch {0} {1}");
+			Assert.Equal(ModbusHelper.GetUShort(response, offset + 4), wrapped.ResponseLength, "Length mismatch {0} {1}");
+			return wrapped.ParseResponse(response, offset + 6);
 		}
 	}
 }
