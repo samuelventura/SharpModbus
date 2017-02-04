@@ -12,8 +12,8 @@ namespace SharpModbus
 		public byte Slave { get { return slave; } }
 		public ushort Address { get { return address; } }
 		public ushort Value { get { return value; } }
-		public ushort RequestLength { get { return 6; } }
-		public ushort ResponseLength { get { return 6; } }
+		public int RequestLength { get { return 6; } }
+		public int ResponseLength { get { return 6; } }
 		
 		public ModbusF06WriteRegister(byte slave, ushort address, ushort value)
 		{

@@ -12,8 +12,8 @@ namespace SharpModbus
 		public byte Slave { get { return slave; } }
 		public ushort Address { get { return address; } }
 		public bool Value { get { return value; } }
-		public ushort RequestLength { get { return 6; } }
-		public ushort ResponseLength { get { return 6; } }
+		public int RequestLength { get { return 6; } }
+		public int ResponseLength { get { return 6; } }
 		
 		public ModbusF05WriteCoil(byte slave, ushort address, bool state)
 		{

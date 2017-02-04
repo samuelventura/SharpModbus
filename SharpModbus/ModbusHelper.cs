@@ -62,12 +62,12 @@ namespace SharpModbus
 			return (byte)(count == 0 ? 0 : (count - 1) / 8 + 1);
 		}
 		
-		public static byte High(ushort value)
+		public static byte High(int value)
 		{
 			return (byte)((value >> 8) & 0xff);
 		}
 		
-		public static byte Low(ushort value)
+		public static byte Low(int value)
 		{
 			return (byte)((value >> 0) & 0xff);
 		}

@@ -12,8 +12,8 @@ namespace SharpModbus
 		public byte Slave { get { return slave; } }
 		public ushort Address { get { return address; } }
 		public ushort Count { get { return count; } }
-		public ushort RequestLength { get { return 6; } }
-		public ushort ResponseLength { get { return (ushort)(3 + ModbusHelper.BytesForWords(count)); } }
+		public int RequestLength { get { return 6; } }
+		public int ResponseLength { get { return 3 + ModbusHelper.BytesForWords(count); } }
 		
 		public ModbusF03ReadHoldingRegisters(byte slave, ushort address, ushort count)
 		{

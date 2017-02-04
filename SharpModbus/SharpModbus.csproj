@@ -56,8 +56,8 @@
     <Compile Include="ModbusF16WriteRegisters.cs" />
     <Compile Include="ModbusHelper.cs" />
     <Compile Include="ModbusMaster.cs" />
-    <Compile Include="ModbusRTU.cs" />
-    <Compile Include="ModbusTCP.cs" />
+    <Compile Include="ModbusRTUWrapper.cs" />
+    <Compile Include="ModbusTCPWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RtuModbusProtocol.cs" />
     <Compile Include="SerialModbusStream.cs" />
