@@ -36,6 +36,14 @@ namespace SharpModbus
 			return wrapped.ApplyTo(model);
 		}
 		
+		public void FillResponse(byte[] response, int offset, object value)
+		{
+			wrapped.FillResponse(response, offset, value);
+			var crc = ModbusHelper.CRC16(response, offset, wrapped.ResponseLength);
+			response[offset + wrapped.ResponseLength + 0] = ModbusHelper.High(crc);
+			response[offset + wrapped.ResponseLength + 1] = ModbusHelper.Low(crc);
+		}
+		
 		public override string ToString()
 		{
 			return string.Format("[ModbusRTUWrapper Wrapped={0}]", wrapped);

@@ -45,6 +45,16 @@ namespace SharpModbus
 			return model.getDOs(slave, address, count);
 		}
 		
+		public void FillResponse(byte[] response, int offset, object value)
+		{
+			var bytes = ModbusHelper.BytesForBools(count);
+			response[offset + 0] = slave;
+			response[offset + 1] = 1;
+			response[offset + 2] = bytes;
+			var data = ModbusHelper.EncodeBools((bool[])value);
+			ModbusHelper.Copy(data, 0, response, offset + 3, bytes);
+		}
+		
 		public override string ToString()
 		{
 			return string.Format("[ModbusF01ReadCoils Slave={0}, Address={1}, Count={2}]", slave, address, count);

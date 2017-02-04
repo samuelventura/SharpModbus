@@ -50,6 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EncodeTest.cs" />
     <Compile Include="ScannerTest.cs" />
+    <Compile Include="SlaveTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpModbus\SharpModbus.csproj">

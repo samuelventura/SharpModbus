@@ -23,13 +23,8 @@ namespace SharpModbus
 		
 		public void FillRequest(byte[] request, int offset)
 		{
+			FillResponse(request, offset, null);
 			var bytes = ModbusHelper.EncodeBools(values);
-			request[offset + 0] = slave;
-			request[offset + 1] = 15;
-			request[offset + 2] = ModbusHelper.High(address);
-			request[offset + 3] = ModbusHelper.Low(address);
-			request[offset + 4] = ModbusHelper.High(values.Length);
-			request[offset + 5] = ModbusHelper.Low(values.Length);			
 			request[offset + 6] = (byte)bytes.Length;
 			ModbusHelper.Copy(bytes, 0, request, offset + 7, bytes.Length);
 		}
@@ -47,6 +42,16 @@ namespace SharpModbus
 		{
 			model.setDOs(slave, address, values);
 			return null;
+		}
+		
+		public void FillResponse(byte[] response, int offset, object value)
+		{
+			response[offset + 0] = slave;
+			response[offset + 1] = 15;
+			response[offset + 2] = ModbusHelper.High(address);
+			response[offset + 3] = ModbusHelper.Low(address);
+			response[offset + 4] = ModbusHelper.High(values.Length);
+			response[offset + 5] = ModbusHelper.Low(values.Length);			
 		}
 		
 		public override string ToString()

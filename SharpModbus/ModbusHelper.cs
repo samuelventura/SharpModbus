@@ -89,9 +89,9 @@ namespace SharpModbus
 				bools[offset + i] = ((b >> i) & 0x01) == 1;
 		}
 		
-		public static ushort BytesForWords(int count)
+		public static byte BytesForWords(int count)
 		{
-			return (ushort)(2 * count);
+			return (byte)(2 * count);
 		}
 		
 		public static byte BytesForBools(int count)

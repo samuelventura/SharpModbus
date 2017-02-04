@@ -46,6 +46,11 @@ namespace SharpModbus
 			return null;
 		}
 		
+		public void FillResponse(byte[] response, int offset, object value)
+		{
+			FillRequest(response, offset);
+		}
+		
 		public override string ToString()
 		{
 			return string.Format("[ModbusF06WriteRegister Slave={0}, Address={1}, Value={2}]", slave, address, value);

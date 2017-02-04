@@ -10,5 +10,6 @@ namespace SharpModbus
 		void FillRequest(byte[] request, int offset);
 		object ParseResponse(byte[] response, int offset);
 		object ApplyTo(ModbusModel model);
+		void FillResponse(byte[] response, int offset, object value);
 	}
 }

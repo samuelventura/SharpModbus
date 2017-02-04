@@ -45,6 +45,16 @@ namespace SharpModbus
 			return model.getWIs(slave, address, count);
 		}
 		
+		public void FillResponse(byte[] response, int offset, object value)
+		{
+			var bytes = ModbusHelper.BytesForWords(count);
+			response[offset + 0] = slave;
+			response[offset + 1] = 4;
+			response[offset + 2] = bytes;
+			var data = ModbusHelper.EncodeWords((ushort[])value);
+			ModbusHelper.Copy(data, 0, response, offset + 3, bytes);
+		}
+		
 		public override string ToString()
 		{
 			return string.Format("[ModbusF04ReadInputRegisters Slave={0}, Address={1}, Count={2}]", slave, address, count);
