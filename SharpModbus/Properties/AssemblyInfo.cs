@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SharpModbus")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany(samuel.ventura@yeico.com")]
+[assembly: AssemblyCompany("samuel.ventura@yeico.com")]
 [assembly: AssemblyProduct("SharpModbus")]
 [assembly: AssemblyCopyright("Copyright 2017 Samuel Ventura")]
 [assembly: AssemblyTrademark("")]
