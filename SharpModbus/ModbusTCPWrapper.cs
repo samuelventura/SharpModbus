@@ -37,6 +37,11 @@ namespace SharpModbus
 			return wrapped.ParseResponse(response, offset + 6);
 		}
 		
+		public object ApplyTo(ModbusModel model)
+		{
+			return wrapped.ApplyTo(model);
+		}
+		
 		public override string ToString()
 		{
 			return string.Format("[ModbusTCPWrapper Wrapped={0}, TransactionId={1}]", wrapped, transactionId);

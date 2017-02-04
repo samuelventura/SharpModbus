@@ -40,6 +40,12 @@ namespace SharpModbus
 			return null;
 		}
 		
+		public object ApplyTo(ModbusModel model)
+		{
+			model.setWO(slave, address, value);
+			return null;
+		}
+		
 		public override string ToString()
 		{
 			return string.Format("[ModbusF06WriteRegister Slave={0}, Address={1}, Value={2}]", slave, address, value);

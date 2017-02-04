@@ -41,6 +41,12 @@ namespace SharpModbus
 			return null;
 		}
 		
+		public object ApplyTo(ModbusModel model)
+		{
+			model.setDO(slave, address, value);
+			return null;
+		}
+		
 		public override string ToString()
 		{
 			return string.Format("[ModbusF05WriteCoil Slave={0}, Address={1}, Value={2}]", slave, address, value);

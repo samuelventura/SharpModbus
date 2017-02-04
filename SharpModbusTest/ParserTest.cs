@@ -21,35 +21,50 @@ namespace SharpModbusTest
 			Test(new ModbusF05WriteCoil(0x01, 0x0203, true));
 			Test(new ModbusF05WriteCoil(0x01, 0x0203, false));
 			Test(new ModbusF06WriteRegister(0x01, 0x0203, 0x0405));
-			Test(new ModbusF15WriteCoils(0x01, 0x0203, new bool[]{}));
-			Test(new ModbusF15WriteCoils(0x01, 0x0203, new bool[]{true}));
-			Test(new ModbusF15WriteCoils(0x01, 0x0203, new bool[]{false}));
-			Test(new ModbusF15WriteCoils(0x01, 0x0203, new bool[]{true, false, true, false, true, false, true}));
-			Test(new ModbusF15WriteCoils(0x01, 0x0203, new bool[]{true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false}));
-			Test(new ModbusF16WriteRegisters(0x01, 0x0203, new ushort[]{}));
-			Test(new ModbusF16WriteRegisters(0x01, 0x0203, new ushort[]{0x0405, 0x0607, 0x0809, 0x0A0B}));
-			Test(new ModbusF16WriteRegisters(0x01, 0x0203, new ushort[]{0x0405, 0x0607, 0x0809, 0x0A0B, 0x0405, 0x0607, 0x0809, 0x0A0B, 0x0405, 0x0607, 0x0809, 0x0A0B}));
+			Test(new ModbusF15WriteCoils(0x01, 0x0203, bo()));
+			Test(new ModbusF15WriteCoils(0x01, 0x0203, bo(true)));
+			Test(new ModbusF15WriteCoils(0x01, 0x0203, bo(false)));
+			Test(new ModbusF15WriteCoils(0x01, 0x0203, bo(true, false, true, false, true, false, true)));
+			Test(new ModbusF15WriteCoils(0x01, 0x0203, bo(true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false)));
+			Test(new ModbusF16WriteRegisters(0x01, 0x0203, us()));
+			Test(new ModbusF16WriteRegisters(0x01, 0x0203, us(0x0405, 0x0607, 0x0809, 0x0A0B)));
+			Test(new ModbusF16WriteRegisters(0x01, 0x0203, us(0x0405, 0x0607, 0x0809, 0x0A0B, 0x0405, 0x0607, 0x0809, 0x0A0B, 0x0405, 0x0607, 0x0809, 0x0A0B)));
 		}
 		
 		void Test(IModbusCommand cmd)
 		{
 			const int offset = 2;
-			var request = new byte[3*offset + cmd.RequestLength];
+			var request = new byte[offset + cmd.RequestLength];
 			cmd.FillRequest(request, offset);
 			var pcmd = ModbusParser.Parse(request, offset);
 			Assert.AreEqual(pcmd.ToString(), cmd.ToString());
 			
 			var rtuWrap = rtuProto.Wrap(cmd);
-			var rtuRequest = new byte[3*offset + rtuWrap.RequestLength];
+			var rtuRequest = new byte[offset + rtuWrap.RequestLength];
 			rtuWrap.FillRequest(rtuRequest, offset);
 			var prtuWrap = rtuProto.Parse(rtuRequest, offset);
 			Assert.AreEqual(prtuWrap.ToString(), rtuWrap.ToString());
 			
 			var tcpWrap = tcpProto.Wrap(cmd);
-			var tcpRequest = new byte[3*offset + tcpWrap.RequestLength];
+			var tcpRequest = new byte[offset + tcpWrap.RequestLength];
 			tcpWrap.FillRequest(tcpRequest, offset);
 			var ptcpWrap = tcpProto.Parse(tcpRequest, offset);
 			Assert.AreEqual(ptcpWrap.ToString(), tcpWrap.ToString());
+		}
+		
+		ushort[] us(params ushort[] args)
+		{
+			return args;
+		}
+		
+		bool[] bo(params bool[] args)
+		{
+			return args;
+		}
+		
+		byte[] by(params byte[] args)
+		{
+			return args;
 		}
 	}
 }

@@ -7,8 +7,8 @@ namespace SharpModbus
 		public static ushort CRC16(byte[] bytes, int offset, int count)
 		{
 			ushort crc = 0xFFFF;
-			for (int pos = offset; pos < count; pos++) {
-				crc ^= (ushort)bytes[pos];
+			for (int pos = 0; pos < count; pos++) {
+				crc ^= (ushort)bytes[pos + offset];
 				for (int i = 8; i > 0; i--) {
 					if ((crc & 0x0001) != 0) {
 						crc >>= 1;

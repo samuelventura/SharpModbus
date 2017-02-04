@@ -58,6 +58,7 @@
     <Compile Include="ModbusF16WriteRegisters.cs" />
     <Compile Include="ModbusHelper.cs" />
     <Compile Include="ModbusMaster.cs" />
+    <Compile Include="ModbusModel.cs" />
     <Compile Include="ModbusParser.cs" />
     <Compile Include="ModbusRTUScanner.cs" />
     <Compile Include="ModbusRTUWrapper.cs" />

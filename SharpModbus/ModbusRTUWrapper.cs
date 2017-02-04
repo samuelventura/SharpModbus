@@ -31,6 +31,11 @@ namespace SharpModbus
 			return wrapped.ParseResponse(response, offset);
 		}
 		
+		public object ApplyTo(ModbusModel model)
+		{
+			return wrapped.ApplyTo(model);
+		}
+		
 		public override string ToString()
 		{
 			return string.Format("[ModbusRTUWrapper Wrapped={0}]", wrapped);

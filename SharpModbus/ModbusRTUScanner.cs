@@ -16,13 +16,13 @@ namespace SharpModbus
 		
 		public IModbusWrapper Scan()
 		{
-			if (buffer.Count >= 6 + 2) {
+			if (buffer.Count >= 8) {
 				var code = buffer[1];
 				CheckCode(code);
-				var length = 6 + 2;
+				var length = 8;
 				if (HasBytesAt6(code)) {
-					if (buffer.Count >= 6 + 2 + 1) {
-						length = 6 + 2 + 1 + buffer[6];
+					if (buffer.Count >= 9) {
+						length = 9 + buffer[6];
 					} else
 						return null;
 				}

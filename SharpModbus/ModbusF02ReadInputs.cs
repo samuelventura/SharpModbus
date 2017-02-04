@@ -40,6 +40,11 @@ namespace SharpModbus
 			return ModbusHelper.DecodeBools(response, offset + 3, count);
 		}
 		
+		public object ApplyTo(ModbusModel model)
+		{
+			return model.getDIs(slave, address, count);
+		}
+		
 		public override string ToString()
 		{
 			return string.Format("[ModbusF02ReadInputs Slave={0}, Address={1}, Count={2}]", slave, address, count);
