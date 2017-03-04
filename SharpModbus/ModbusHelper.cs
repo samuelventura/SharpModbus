@@ -17,7 +17,7 @@ namespace SharpModbus
 						crc >>= 1;
 				}
 			}
-			return (ushort)((crc >> 8) & 0x00ff | (crc << 8) & 0xff00);
+			return crc;
 		}
 		
 		public static byte EncodeBool(bool value)
@@ -108,13 +108,6 @@ namespace SharpModbus
 		{
 			return (byte)((value >> 0) & 0xff);
 		}
-		/*
-		public static void Set(byte[] bytes, int offset, ushort value)
-		{
-			bytes[offset + 0] = (byte)((value >> 8) & 0xff);
-			bytes[offset + 1] = (byte)((value >> 0) & 0xff);
-		}
-		*/
 		
 		public static ushort GetUShort(byte bh, byte bl)
 		{
@@ -129,6 +122,14 @@ namespace SharpModbus
 			return (ushort)(
 			    ((bytes[offset + 0] << 8) & 0xFF00)
 			    | (bytes[offset + 1] & 0xff)
+			);
+		}
+		
+		public static ushort GetUShortLittleEndian(byte[] bytes, int offset)
+		{
+			return (ushort)(
+			    ((bytes[offset + 1] << 8) & 0xFF00)
+			    | (bytes[offset + 0] & 0xff)
 			);
 		}
 		

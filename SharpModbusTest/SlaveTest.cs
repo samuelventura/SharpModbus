@@ -9,7 +9,7 @@ namespace SharpModbusTest
 	public class SlaveTest
 	{
 		[Test]
-		public void RtuSlaveMethod()
+		public void RtuSlaveTest()
 		{
 			var model = new ModbusModel();
 			var stream = new ModelStream(model, new ModbusRTUScanner());
@@ -18,7 +18,7 @@ namespace SharpModbusTest
 		}
 		
 		[Test]
-		public void TcpSlaveMethod()
+		public void TcpSlaveTest()
 		{
 			var model = new ModbusModel();
 			var stream = new ModelStream(model, new ModbusTCPScanner());
