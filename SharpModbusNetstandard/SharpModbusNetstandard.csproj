@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SharpModbus</AssemblyName>
+    <RootNamespace>SharpModbus</RootNamespace>
+  </PropertyGroup>
+
+  <Import Project="..\SharpModbusShared\SharpModbusShared.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="4.4.0" />
+  </ItemGroup>
+
+</Project>

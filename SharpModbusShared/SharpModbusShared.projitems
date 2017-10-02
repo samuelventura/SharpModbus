@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>76f38898-a721-409b-bcd4-6e801433c5e5</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SharpModbusShared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IModbusCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IModbusProtocol.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IModbusScanner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IModbusStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IModbusWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusF01ReadCoils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusF02ReadInputs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusF03ReadHoldingRegisters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusF04ReadInputRegisters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusF05WriteCoil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusF06WriteRegister.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusF15WriteCoils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusF16WriteRegisters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusMaster.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusRTUProtocol.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusRTUScanner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusRTUWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusSerialStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusSocketStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusTCPProtocol.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusTCPScanner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModbusTCPWrapper.cs" />
+  </ItemGroup>
+</Project>
