@@ -12,3 +12,4 @@ Look the tests at the SharpModbusTest subproject.
 ## TODO
 
 - [ ] Improve documentation and samples
+- [ ] Remove transactionId property from protocols
