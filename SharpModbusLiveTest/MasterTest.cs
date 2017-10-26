@@ -21,6 +21,7 @@ namespace SharpModbusTest
 		[Test]
 		public void ModportSweepTest()
 		{
+			//http://comfiletech.com/etc/field-i-o/modport-i-o-module/
 			//m0 - MD-DIDC8 8 digital input
 			//m1 - MD-DOSO8 8 digital output
 			//all outputs wired to corresponding inputs
