@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SharpModbus\SharpModbus.csproj">
-    </ProjectReference>  
+    <ProjectReference Include="..\SharpModbus\SharpModbus.csproj"/>  
     <PackageReference Include="NUnit" Version="3.8.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.*" />
