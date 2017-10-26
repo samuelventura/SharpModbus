@@ -4,7 +4,7 @@ C# Modbus Tools
 
 ## Usage
 
-No documentation yet. Resort to the tests at the SharpModbusTest subproject for guiadance. 
+No documentation yet. Resort to tests at SharpModbusLiveTest subproject for guidance. It contains a couple of real devices communication samples.
 
 [SharpMaster](https://github.com/samuelventura/SharpMaster) uses SharpModbus too.
 
