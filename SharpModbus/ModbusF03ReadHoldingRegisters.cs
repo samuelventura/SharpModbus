@@ -40,7 +40,7 @@ namespace SharpModbus
 			return ModbusHelper.DecodeWords(response, offset + 3, count);
 		}
 		
-		public object ApplyTo(ModbusModel model)
+		public object ApplyTo(IModbusModel model)
 		{
 			return model.getWOs(slave, address, count);
 		}

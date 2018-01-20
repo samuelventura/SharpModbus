@@ -32,7 +32,7 @@ namespace SharpModbus
 			return wrapped.ParseResponse(response, offset);
 		}
 		
-		public object ApplyTo(ModbusModel model)
+		public object ApplyTo(IModbusModel model)
 		{
 			return wrapped.ApplyTo(model);
 		}

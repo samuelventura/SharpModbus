@@ -41,7 +41,7 @@ namespace SharpModbus
 			return null;
 		}
 		
-		public object ApplyTo(ModbusModel model)
+		public object ApplyTo(IModbusModel model)
 		{
 			model.setDO(slave, address, value);
 			return null;

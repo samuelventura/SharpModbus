@@ -11,7 +11,7 @@ namespace SharpModbus
 		WI
 	}
 	
-	public class ModbusModel
+	public class ModbusModel : IModbusModel
 	{
 		private readonly IDictionary<string, bool> digitals = new Dictionary<string, bool>();
 		private readonly IDictionary<string, ushort> words = new Dictionary<string, ushort>();
