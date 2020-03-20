@@ -23,7 +23,8 @@ namespace SharpModbusTest
 			var model = new ModbusModel();
 			var stream = new ModelStream(model, new ModbusTCPScanner());
 			var master = new ModbusMaster(stream, new ModbusTCPProtocol());
-			Test(model, master);
+			//ensure TransactionId wraps around 0xFFFF
+			for(var i=0; i<=0xFFFF; i++) Test(model, master);
 		}
 		
 		void Test(ModbusModel model, ModbusMaster master)

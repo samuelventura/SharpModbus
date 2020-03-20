@@ -8,9 +8,16 @@ namespace SharpModbus
 		
 		private int TransactionId { get { return transactionId; } }
 		
+		private int NextTid()
+		{
+			var tid = transactionId++;
+			transactionId &= 0xFFFF;
+			return tid;
+		}
+
 		public IModbusWrapper Wrap(IModbusCommand wrapped)
 		{
-			return new ModbusTCPWrapper(wrapped, transactionId++);
+			return new ModbusTCPWrapper(wrapped, NextTid());
 		}
 		
 		public IModbusWrapper Parse(byte[] request, int offset)
