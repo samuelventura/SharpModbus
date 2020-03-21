@@ -2,9 +2,9 @@
 
 namespace SharpModbus
 {
-	public interface IModbusScanner
-	{
-		void Append(byte[] data, int offset, int count);
-		IModbusWrapper Scan();
-	}
+    public interface IModbusScanner
+    {
+        void Append(byte[] data, int offset, int count);
+        IModbusWrapper Scan();
+    }
 }
