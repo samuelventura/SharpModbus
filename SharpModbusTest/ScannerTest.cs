@@ -4,7 +4,6 @@ using SharpModbus;
 
 namespace SharpModbusTest
 {
-	[TestFixture]
 	public class ScannerTest
 	{
 		[Test]

@@ -6,7 +6,11 @@ namespace SharpModbus
     {
         private int transactionId = 0;
 
-        private int TransactionId { get { return transactionId; } }
+        public int TransactionId
+        {
+            get { return transactionId; }
+            set { transactionId = value; }
+        }
 
         private int NextTid()
         {
@@ -23,7 +27,7 @@ namespace SharpModbus
         public IModbusWrapper Parse(byte[] request, int offset)
         {
             var wrapped = ModbusParser.Parse(request, offset + 6);
-            Assert.Equal(wrapped.RequestLength, ModbusHelper.GetUShort(request, offset + 4), 
+            Assert.Equal(wrapped.RequestLength, ModbusHelper.GetUShort(request, offset + 4),
                 "RequestLength mismatch got {0} expected {1}");
             var transaction = ModbusHelper.GetUShort(request, offset);
             return new ModbusTCPWrapper(wrapped, transaction);

@@ -28,21 +28,28 @@ namespace SharpModbus
             serialPort.Write(data, 0, data.Length);
         }
 
-        public void Read(byte[] data)
+        public int Read(byte[] data)
         {
             var count = 0;
+            var to = 3.0 * 10.0 / serialPort.BaudRate; //spec says 1.5 chars
             var dl = DateTime.Now.AddMilliseconds(serialPort.ReadTimeout);
-            while (DateTime.Now < dl && count < data.Length)
+            while (count < data.Length)
             {
                 var available = serialPort.BytesToRead;
-                if (available == 0) Thread.Sleep(1);
-                else {
+                if (available == 0)
+                {
+                    if (DateTime.Now > dl) break;
+                    Thread.Sleep(1);
+                }
+                else
+                {
                     var size = (int)Math.Min(available, data.Length - count);
                     count += serialPort.Read(data, count, size);
+                    dl = DateTime.Now.AddSeconds(to); //9600 -> 3.125ms
                 }
             }
             if (monitor != null) monitor('<', data, count);
-            Assert.Equal(count, data.Length, "Partial read got {0} expected {1}");
+            return count;
         }
     }
 }

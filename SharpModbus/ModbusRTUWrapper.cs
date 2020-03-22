@@ -12,7 +12,6 @@ namespace SharpModbus
         public IModbusCommand Wrapped { get { return wrapped; } }
         public int RequestLength { get { return wrapped.RequestLength + 2; } }
         public int ResponseLength { get { return wrapped.ResponseLength + 2; } }
-        public int ExceptionLength { get { return 3 + 2; } }
 
         public ModbusRTUWrapper(IModbusCommand wrapped)
         {
@@ -51,7 +50,7 @@ namespace SharpModbus
 
         public byte[] GetException(byte code)
         {
-            var exception = new byte[ExceptionLength];
+            var exception = new byte[5];
             exception[0] = wrapped.Slave;
             exception[1] = (byte)(wrapped.Code | 0x80);
             exception[2] = code;
@@ -61,8 +60,9 @@ namespace SharpModbus
             return exception;
         }
 
-        public void CheckException(byte[] response)
+        public void CheckException(byte[] response, int count)
         {
+            if (count < 5) Thrower.Throw("Partial exception packet got {0} expected >= {1}", count, 5);
             var offset = 0;
             var code = response[offset + 1];
             if ((code & 0x80) != 0)

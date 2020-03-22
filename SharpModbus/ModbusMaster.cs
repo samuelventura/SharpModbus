@@ -1,9 +1,26 @@
 ﻿using System;
+using System.IO.Ports;
 
 namespace SharpModbus
 {
     public class ModbusMaster : IDisposable
     {
+        public static ModbusMaster RTU(SerialPort serial, int timeout = 400)
+        {
+            if (!serial.IsOpen) serial.Open();
+            var stream = new ModbusSerialStream(serial, timeout);
+            var protocol = new ModbusRTUProtocol();
+            return new ModbusMaster(stream, protocol);
+        }
+
+        public static ModbusMaster TCP(string ip, int port, int timeout = 400)
+        {
+            var socket = TcpTools.ConnectWithTimeout(ip, port, timeout);
+            var stream = new ModbusSocketStream(socket, timeout);
+            var protocol = new ModbusTCPProtocol();
+            return new ModbusMaster(stream, protocol);
+        }
+
         private readonly IModbusProtocol protocol;
         private readonly IModbusStream stream;
 
@@ -83,15 +100,10 @@ namespace SharpModbus
             var wrapper = protocol.Wrap(cmd);
             var request = new byte[wrapper.RequestLength];
             var response = new byte[wrapper.ResponseLength];
-            var exception = new byte[wrapper.ExceptionLength];
-            var tail = new byte[response.Length - exception.Length];
             wrapper.FillRequest(request, 0);
             stream.Write(request);
-            stream.Read(exception);
-            wrapper.CheckException(exception);
-            stream.Read(tail);
-            for (var i = 0; i < exception.Length; i++) response[i] = exception[i];
-            for (var i = 0; i < tail.Length; i++) response[i + exception.Length] = tail[i];
+            var count = stream.Read(response);
+            if (count < response.Length) wrapper.CheckException(response, count);
             return wrapper.ParseResponse(response, 0);
         }
     }

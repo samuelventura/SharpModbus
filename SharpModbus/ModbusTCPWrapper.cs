@@ -14,7 +14,6 @@ namespace SharpModbus
         public int TransactionId { get { return transactionId; } }
         public int RequestLength { get { return wrapped.RequestLength + 6; } }
         public int ResponseLength { get { return wrapped.ResponseLength + 6; } }
-        public int ExceptionLength { get { return 3 + 6; } }
 
         public ModbusTCPWrapper(IModbusCommand wrapped, int transactionId)
         {
@@ -59,7 +58,7 @@ namespace SharpModbus
 
         public byte[] GetException(byte code)
         {
-            var exception = new byte[ExceptionLength];
+            var exception = new byte[9];
             exception[0] = ModbusHelper.High(transactionId);
             exception[1] = ModbusHelper.Low(transactionId);
             exception[2] = 0;
@@ -72,8 +71,9 @@ namespace SharpModbus
             return exception;
         }
 
-        public void CheckException(byte[] response)
+        public void CheckException(byte[] response, int count)
         {
+            if (count < 9) Thrower.Throw("Partial exception packet got {0} expected >= {1}", count, 9);
             var offset = 6;
             var code = response[offset + 1];
             if ((code & 0x80) != 0)
