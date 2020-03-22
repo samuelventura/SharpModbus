@@ -36,8 +36,10 @@ namespace SharpModbus
             {
                 var available = socket.Available;
                 if (available == 0) Thread.Sleep(1);
-                var size = (int)Math.Min(available, data.Length - count);
-                count += socket.GetStream().Read(data, count, size);
+                else {
+                    var size = (int)Math.Min(available, data.Length - count);
+                    count += socket.GetStream().Read(data, count, size);
+                }
             }
             if (monitor != null) monitor('<', data, count);
             Assert.Equal(count, data.Length, "Partial read got {0} expected {1}");

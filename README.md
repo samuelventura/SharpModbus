@@ -10,10 +10,10 @@ No documentation yet. Resort to tests at SharpModbusLiveTest subproject for guid
 
 ## Development Setup
 
-- Windows 10 Pro 64x (up to date .Net)
-- dotnet-sdk-2.0.2-win-x64.exe
-- Visual Studio Code
+- Windows 10 Pro 64x / macOS 10.13.2
+- Net Core SDK 3.1.200
 - dotnet CLI
+- VS Code
 
 ## Multiplatform
 

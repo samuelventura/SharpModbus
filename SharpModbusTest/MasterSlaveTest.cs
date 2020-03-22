@@ -15,7 +15,7 @@ namespace SharpModbusTest
             var model = new ModbusModel();
             var stream = new ModelStream(model, new ModbusRTUScanner());
             var master = new ModbusMaster(stream, new ModbusRTUProtocol());
-            Test(model, master);
+            SharedSlaveTest(model, master);
         }
 
         [Test]
@@ -25,10 +25,37 @@ namespace SharpModbusTest
             var stream = new ModelStream(model, new ModbusTCPScanner());
             var master = new ModbusMaster(stream, new ModbusTCPProtocol());
             //ensure TransactionId wraps around 0xFFFF
-            for (var i = 0; i <= 0xFFFF; i++) Test(model, master);
+            for (var i = 0; i <= 0xFFFF; i++) SharedSlaveTest(model, master);
         }
 
-        void Test(ModbusModel model, ModbusMaster master)
+        [Test]
+        public void RtuExceptionTest()
+        {
+            var model = new ModbusModel();
+            var stream = new ModelStream(model, new ModbusRTUScanner());
+            var master = new ModbusMaster(stream, new ModbusRTUProtocol());
+            var ex = Assert.Throws<ModbusException>(() => SharedExceptionTest(model, master));
+            Assert.AreEqual("Modbus exception 2", ex.Message);
+            Assert.AreEqual(2, ex.Code);
+        }
+
+        [Test]
+        public void TcpExceptionTest()
+        {
+            var model = new ModbusModel();
+            var stream = new ModelStream(model, new ModbusTCPScanner());
+            var master = new ModbusMaster(stream, new ModbusTCPProtocol());
+            var ex = Assert.Throws<ModbusException>(() => SharedExceptionTest(model, master));
+            Assert.AreEqual("Modbus exception 2", ex.Message);
+            Assert.AreEqual(2, ex.Code);
+        }
+
+        void SharedExceptionTest(ModbusModel model, ModbusMaster master)
+        {
+            master.ReadCoil(1, 2);
+        }
+
+        void SharedSlaveTest(ModbusModel model, ModbusMaster master)
         {
             master.WriteCoil(1, 2, true);
             Assert.AreEqual(true, master.ReadCoil(1, 2));
@@ -97,18 +124,26 @@ namespace SharpModbusTest
             var cmd = scanner.Scan();
             if (cmd != null)
             {
-                var value = cmd.ApplyTo(model);
-                var response = new byte[cmd.ResponseLength];
-                cmd.FillResponse(response, 0, value);
-                buffer.AddRange(response);
+                try
+                {
+                    var value = cmd.ApplyTo(model);
+                    var response = new byte[cmd.ResponseLength];
+                    cmd.FillResponse(response, 0, value);
+                    buffer.AddRange(response);
+                }
+                catch (Exception)
+                {
+                    buffer.AddRange(cmd.GetException(2));
+                }
             }
         }
 
         public void Read(byte[] data)
         {
-            if (buffer.Count < data.Length) {
-				throw Thrower.Make("Partial read got {0} expected {1}", buffer.Count, data.Length);
-			}
+            if (buffer.Count < data.Length)
+            {
+                throw Thrower.Make("Partial read got {0} expected {1}", buffer.Count, data.Length);
+            }
             for (var i = 0; i < data.Length; i++) data[i] = buffer[i];
             buffer.RemoveRange(0, data.Length);
         }

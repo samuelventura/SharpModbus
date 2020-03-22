@@ -49,6 +49,18 @@ namespace SharpModbus
             response[offset + wrapped.ResponseLength + 1] = ModbusHelper.High(crc);
         }
 
+        public byte[] GetException(byte code)
+        {
+            var exception = new byte[ExceptionLength];
+            exception[0] = wrapped.Slave;
+            exception[1] = (byte)(wrapped.Code | 0x80);
+            exception[2] = code;
+            var crc = ModbusHelper.CRC16(exception, 0, 3);
+            exception[3] = ModbusHelper.Low(crc);
+            exception[4] = ModbusHelper.High(crc);
+            return exception;
+        }
+
         public void CheckException(byte[] response)
         {
             var offset = 0;
@@ -61,7 +73,7 @@ namespace SharpModbus
                 //crc is little endian page 13 http://modbus.org/docs/Modbus_over_serial_line_V1_02.pdf
                 var crc2 = ModbusHelper.GetUShortLittleEndian(response, offset + 3);
                 Assert.Equal(crc2, crc1, "CRC mismatch got {0:X4} expected {1:X4}");
-                Thrower.Throw("Modbus exception {0}", response[offset + 2]);
+                throw new ModbusException(response[offset + 2]);
             }
         }
 

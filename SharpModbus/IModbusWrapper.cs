@@ -7,6 +7,7 @@ namespace SharpModbus
     {
         IModbusCommand Wrapped { get; }
         int ExceptionLength { get; }
+        byte[] GetException(byte code);
         void CheckException(byte[] respose);
     }
 }

@@ -57,6 +57,21 @@ namespace SharpModbus
             wrapped.FillResponse(response, offset + 6, value);
         }
 
+        public byte[] GetException(byte code)
+        {
+            var exception = new byte[ExceptionLength];
+            exception[0] = ModbusHelper.High(transactionId);
+            exception[1] = ModbusHelper.Low(transactionId);
+            exception[2] = 0;
+            exception[3] = 0;
+            exception[4] = ModbusHelper.High(3);
+            exception[5] = ModbusHelper.Low(3);
+            exception[6 + 0] = wrapped.Slave;
+            exception[6 + 1] = (byte)(wrapped.Code | 0x80);
+            exception[6 + 2] = code;
+            return exception;
+        }
+
         public void CheckException(byte[] response)
         {
             var offset = 6;
@@ -65,7 +80,7 @@ namespace SharpModbus
             {
                 Assert.Equal(response[offset + 0], wrapped.Slave, "Slave mismatch got {0} expected {1}");
                 Assert.Equal(code & 0x7F, wrapped.Code, "Code mismatch got {0} expected {1}");
-                Thrower.Throw("Modbus exception {0}", response[offset + 2]);
+                throw new ModbusException(response[offset + 2]);
             }
         }
 
