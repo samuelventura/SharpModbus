@@ -33,18 +33,18 @@ No documentation yet. Resort to tests at SharpModbusTest and SharpModbusSpecialT
 
 ```bash
 #packing for nuget
-dotnet clean -c Release
+dotnet clean SharpModbus -c Release
 dotnet pack SharpModbus -c Release
 #cross platform test cases
 dotnet test SharpModbusTest
-#compile check special tests
-dotnet build SharpModbusSpecialTest
 #com0com test cases need COM98 and COM99
 dotnet test SharpModbusSpecialTest --filter FullyQualifiedName~Com0ComSlaveTest
 #comfile modport connected on COM10 see details inside
 dotnet test SharpModbusSpecialTest --filter FullyQualifiedName~ComfileModportTest
 #opto22 snappac connected on 10.77.0.2:502 see details inside
 dotnet test SharpModbusSpecialTest --filter FullyQualifiedName~Opto22SnapPacTest
+#compile check special tests
+dotnet build SharpModbusSpecialTest
 ```
 
 ## Multiplatform

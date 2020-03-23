@@ -104,7 +104,9 @@ namespace SharpModbusTest
         private void Process(TcpClient client)
         {
             var buffer = new byte[256];
-            client.ReceiveTimeout = -1;
+           client.GetStream().ReadTimeout = -1;
+            //excepts in Linux/macOS
+            //client.ReceiveTimeout = -1;
             while (true)
             {
                 var size = client.GetStream().Read(buffer);
