@@ -1,11 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Sockets;
 using NUnit.Framework;
-using SharpModbus;
 
-namespace SharpModbusTest
+namespace SharpModbus.Test
 {
     public class SlaveTest
     {

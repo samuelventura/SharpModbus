@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Net;
 using System.Text;
 using System.IO.Ports;
@@ -7,9 +6,8 @@ using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using SharpModbus;
 
-namespace SharpModbusTest
+namespace SharpModbus.Test
 {
     public static class H
     {
@@ -104,7 +102,7 @@ namespace SharpModbusTest
         private void Process(TcpClient client)
         {
             var buffer = new byte[256];
-           client.GetStream().ReadTimeout = -1;
+            client.GetStream().ReadTimeout = -1;
             //excepts in Linux/macOS
             //client.ReceiveTimeout = -1;
             while (true)

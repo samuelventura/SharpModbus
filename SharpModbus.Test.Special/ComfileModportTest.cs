@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO.Ports;
-using System.Net.Sockets;
 using System.Threading;
 using NUnit.Framework;
-using SharpModbus;
 
-namespace SharpModbusSpecialTest
+namespace SharpModbus.Test.Special
 {
     public class ComfileModportTest
     {

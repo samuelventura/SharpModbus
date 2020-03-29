@@ -1,11 +1,8 @@
 ﻿using System;
-using System.IO.Ports;
-using System.Net.Sockets;
 using System.Threading;
 using NUnit.Framework;
-using SharpModbus;
 
-namespace SharpModbusTest
+namespace SharpModbus.Test
 {
     public class Opto22SnapPacTest
     {

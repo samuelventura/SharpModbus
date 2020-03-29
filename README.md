@@ -3,6 +3,7 @@
 C# Modbus Tools
 
 ## Quick Start
+
 ```csharp
 //Modbus RTU over serial
 var master = ModbusMaster.RTU(new SerialPort()
@@ -18,7 +19,7 @@ master.WriteCoils(1, 4, new bool[] { false, true });
 
 ## Documentation
 
-No documentation yet. Resort to tests at SharpModbusTest and SharpModbusSpecialTest subprojects for guidance. A couple of real device communication samples are available there.
+No documentation yet. Resort to tests at SharpModbus.Test and SharpModbus.Test.Special subprojects for guidance. A couple of real device communication samples are available there.
 
 [SharpMaster](https://github.com/samuelventura/SharpMaster) uses SharpModbus too.
 
@@ -26,7 +27,7 @@ No documentation yet. Resort to tests at SharpModbusTest and SharpModbusSpecialT
 
 - Windows 10 Pro 64x / macOS 10.13.2
 - VS Code (bash terminal from Git4Win)
-- Net Core SDK 3.1.200
+- Net Core SDK 3.1.201
 - dotnet CLI
 
 ## Development CLI
@@ -36,15 +37,17 @@ No documentation yet. Resort to tests at SharpModbusTest and SharpModbusSpecialT
 dotnet clean SharpModbus -c Release
 dotnet pack SharpModbus -c Release
 #cross platform test cases
-dotnet test SharpModbusTest
+dotnet test SharpModbus.Test
+#console output for test cases
+dotnet test SharpModbus.Test -v n
 #com0com test cases need COM98 and COM99
-dotnet test SharpModbusSpecialTest --filter FullyQualifiedName~Com0ComSlaveTest
+dotnet test SharpModbus.Test.Special --filter FullyQualifiedName~Com0ComSlaveTest
 #comfile modport connected on COM10 see details inside
-dotnet test SharpModbusSpecialTest --filter FullyQualifiedName~ComfileModportTest
+dotnet test SharpModbus.Test.Special --filter FullyQualifiedName~ComfileModportTest
 #opto22 snappac connected on 10.77.0.2:502 see details inside
-dotnet test SharpModbusSpecialTest --filter FullyQualifiedName~Opto22SnapPacTest
+dotnet test SharpModbus.Test.Special --filter FullyQualifiedName~Opto22SnapPacTest
 #compile check special tests
-dotnet build SharpModbusSpecialTest
+dotnet build SharpModbus.Test.Special
 ```
 
 ## Multiplatform

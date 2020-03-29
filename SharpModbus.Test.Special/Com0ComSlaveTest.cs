@@ -1,13 +1,8 @@
-﻿
-using System;
-using System.Net;
-using System.Net.Sockets;
+﻿using System;
 using System.IO.Ports;
 using NUnit.Framework;
-using SharpModbus;
-using SharpModbusTest;
 
-namespace SharpModbusSpecialTest
+namespace SharpModbus.Test.Special
 {
     public class Com0ComSlaveTest
     {
