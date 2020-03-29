@@ -25,7 +25,7 @@ No documentation yet. Resort to tests at SharpModbus.Test and SharpModbus.Test.S
 
 ## Development Setup
 
-- Windows 10 Pro 64x / macOS 10.13.2
+- Windows 10 Pro 64x (Windows only)
 - VS Code (bash terminal from Git4Win)
 - Net Core SDK 3.1.201
 - dotnet CLI
@@ -50,12 +50,8 @@ dotnet test SharpModbus.Test.Special --filter FullyQualifiedName~Opto22SnapPacTe
 dotnet build SharpModbus.Test.Special
 ```
 
-## Multiplatform
-
-- 1.0.6 at nuget confirmed to work on MacOS/Ubuntu with .Net Core 2.0.2
-- 1.0.6 at nuget confirmed to work on Windows10 with NetFramework40/.Net Core 2.0.2
-
 ## TODO
 
+- [ ] Support Linux / macOS
 - [ ] Improve documentation and samples
 - [ ] Support Modbus ASCII
