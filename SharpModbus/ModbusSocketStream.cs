@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace SharpModbus
 {
-    public class ModbusSocketStream : IModbusStream, IDisposable
+    public class ModbusSocketStream : IModbusStream
     {
         private readonly TcpClient socket;
         private readonly Action<char, byte[], int> monitor;

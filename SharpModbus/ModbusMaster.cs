@@ -1,14 +1,19 @@
 ﻿using System;
-using System.IO.Ports;
 
 namespace SharpModbus
 {
     public class ModbusMaster : IDisposable
     {
-        public static ModbusMaster RTU(SerialPort serial, int timeout = 400)
+        public static ModbusMaster RTU(SerialSettings settings, int timeout = 400)
         {
-            if (!serial.IsOpen) serial.Open();
-            var stream = new ModbusSerialStream(serial, timeout);
+            var stream = new ModbusSerialStream(settings, timeout);
+            var protocol = new ModbusRTUProtocol();
+            return new ModbusMaster(stream, protocol);
+        }
+
+        public static ModbusMaster IsolatedRTU(SerialSettings settings, int timeout = 400)
+        {
+            var stream = new ModbusIsolatedStream(settings, timeout);
             var protocol = new ModbusRTUProtocol();
             return new ModbusMaster(stream, protocol);
         }
@@ -85,12 +90,12 @@ namespace SharpModbus
             Execute(new ModbusF06WriteRegister(slave, address, value));
         }
 
-        public void WriteCoils(byte slave, ushort address, bool[] values)
+        public void WriteCoils(byte slave, ushort address, params bool[] values)
         {
             Execute(new ModbusF15WriteCoils(slave, address, values));
         }
 
-        public void WriteRegisters(byte slave, ushort address, ushort[] values)
+        public void WriteRegisters(byte slave, ushort address, params ushort[] values)
         {
             Execute(new ModbusF16WriteRegisters(slave, address, values));
         }

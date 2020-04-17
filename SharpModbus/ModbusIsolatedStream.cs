@@ -3,33 +3,33 @@ using SharpSerial;
 
 namespace SharpModbus
 {
-    public class ModbusSerialStream : IModbusStream
+    public class ModbusIsolatedStream : IModbusStream
     {
         private readonly Action<char, byte[], int> monitor;
-        private readonly SerialDevice serialDevice;
+        private readonly SerialProcess serialProcess;
         private readonly int timeout;
 
-        public ModbusSerialStream(SerialSettings settings, int timeout, Action<char, byte[], int> monitor = null)
+        public ModbusIsolatedStream(object settings, int timeout, Action<char, byte[], int> monitor = null)
         {
-            this.serialDevice = new SerialDevice(settings);
+            this.serialProcess = new SerialProcess(settings);
             this.timeout = timeout;
             this.monitor = monitor;
         }
 
         public void Dispose()
         {
-            Disposer.Dispose(serialDevice);
+            Disposer.Dispose(serialProcess);
         }
 
         public void Write(byte[] data)
         {
             if (monitor != null) monitor('>', data, data.Length);
-            serialDevice.Write(data);
+            serialProcess.Write(data);
         }
 
         public int Read(byte[] data)
         {
-            var response = serialDevice.Read(data.Length, -1, timeout);
+            var response = serialProcess.Read(data.Length, -1, timeout);
             var count = response.Length;
             for (var i = 0; i < count; i++) data[i] = response[i];
             if (monitor != null) monitor('<', data, count);

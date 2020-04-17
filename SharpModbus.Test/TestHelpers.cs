@@ -107,7 +107,7 @@ namespace SharpModbus.Test
             //client.ReceiveTimeout = -1;
             while (true)
             {
-                var size = client.GetStream().Read(buffer);
+                var size = client.GetStream().Read(buffer, 0, buffer.Length);
                 if (size <= 0) break;
                 scanner.Append(buffer, 0, size);
                 var cmd = scanner.Scan();
@@ -123,7 +123,7 @@ namespace SharpModbus.Test
                     {
                         response = cmd.GetException(2);
                     }
-                    client.GetStream().Write(response);
+                    client.GetStream().Write(response, 0, response.Length);
                 }
             }
         }

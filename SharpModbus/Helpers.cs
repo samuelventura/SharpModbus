@@ -1,8 +1,32 @@
 ﻿using System;
+using System.IO.Ports;
 using System.Net.Sockets;
 
 namespace SharpModbus
 {
+    public class SerialSettings
+    {
+        public SerialSettings() { init(null); }
+        public SerialSettings(string portName) { init(portName); }
+        public string PortName { get; set; }
+        public int BaudRate { get; set; }
+        public int DataBits { get; set; }
+        public Parity Parity { get; set; }
+        public StopBits StopBits { get; set; }
+        public Handshake Handshake { get; set; }
+
+        private void init(string portName)
+        {
+            var sp = new SerialPort();
+            PortName = portName ?? sp.PortName;
+            BaudRate = sp.BaudRate;
+            DataBits = sp.DataBits;
+            Parity = sp.Parity;
+            StopBits = sp.StopBits;
+            Handshake = sp.Handshake;
+        }
+    }
+
     static class Assert
     {
         public static void Equal(int a, int b, string format)
