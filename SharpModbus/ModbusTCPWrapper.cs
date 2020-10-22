@@ -34,9 +34,9 @@ namespace SharpModbus
 
         public object ParseResponse(byte[] response, int offset)
         {
-            Assert.Equal(ModbusHelper.GetUShort(response, offset + 0), transactionId, "TransactionId mismatch got {0} expected {1}");
-            Assert.Equal(ModbusHelper.GetUShort(response, offset + 2), 0, "Zero mismatch got {0} expected {1}");
-            Assert.Equal(ModbusHelper.GetUShort(response, offset + 4), wrapped.ResponseLength, "Length mismatch got {0} expected {1}");
+            Tools.AssertEqual(ModbusHelper.GetUShort(response, offset + 0), transactionId, "TransactionId mismatch got {0} expected {1}");
+            Tools.AssertEqual(ModbusHelper.GetUShort(response, offset + 2), 0, "Zero mismatch got {0} expected {1}");
+            Tools.AssertEqual(ModbusHelper.GetUShort(response, offset + 4), wrapped.ResponseLength, "Length mismatch got {0} expected {1}");
             return wrapped.ParseResponse(response, offset + 6);
         }
 
@@ -73,13 +73,13 @@ namespace SharpModbus
 
         public void CheckException(byte[] response, int count)
         {
-            if (count < 9) Thrower.Throw("Partial exception packet got {0} expected >= {1}", count, 9);
+            if (count < 9) Tools.Throw("Partial exception packet got {0} expected >= {1}", count, 9);
             var offset = 6;
             var code = response[offset + 1];
             if ((code & 0x80) != 0)
             {
-                Assert.Equal(response[offset + 0], wrapped.Slave, "Slave mismatch got {0} expected {1}");
-                Assert.Equal(code & 0x7F, wrapped.Code, "Code mismatch got {0} expected {1}");
+                Tools.AssertEqual(response[offset + 0], wrapped.Slave, "Slave mismatch got {0} expected {1}");
+                Tools.AssertEqual(code & 0x7F, wrapped.Code, "Code mismatch got {0} expected {1}");
                 throw new ModbusException(response[offset + 2]);
             }
         }

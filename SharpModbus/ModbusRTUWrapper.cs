@@ -31,7 +31,7 @@ namespace SharpModbus
             var crc1 = ModbusHelper.CRC16(response, offset, wrapped.ResponseLength);
             //crc is little endian page 13 http://modbus.org/docs/Modbus_over_serial_line_V1_02.pdf
             var crc2 = ModbusHelper.GetUShortLittleEndian(response, offset + wrapped.ResponseLength);
-            Assert.Equal(crc2, crc1, "CRC mismatch got {0:X4} expected {1:X4}");
+            Tools.AssertEqual(crc2, crc1, "CRC mismatch got {0:X4} expected {1:X4}");
             return wrapped.ParseResponse(response, offset);
         }
 
@@ -62,17 +62,17 @@ namespace SharpModbus
 
         public void CheckException(byte[] response, int count)
         {
-            if (count < 5) Thrower.Throw("Partial exception packet got {0} expected >= {1}", count, 5);
+            if (count < 5) Tools.Throw("Partial exception packet got {0} expected >= {1}", count, 5);
             var offset = 0;
             var code = response[offset + 1];
             if ((code & 0x80) != 0)
             {
-                Assert.Equal(response[offset + 0], wrapped.Slave, "Slave mismatch got {0} expected {1}");
-                Assert.Equal(code & 0x7F, wrapped.Code, "Code mismatch got {0} expected {1}");
+                Tools.AssertEqual(response[offset + 0], wrapped.Slave, "Slave mismatch got {0} expected {1}");
+                Tools.AssertEqual(code & 0x7F, wrapped.Code, "Code mismatch got {0} expected {1}");
                 var crc1 = ModbusHelper.CRC16(response, offset, 3);
                 //crc is little endian page 13 http://modbus.org/docs/Modbus_over_serial_line_V1_02.pdf
                 var crc2 = ModbusHelper.GetUShortLittleEndian(response, offset + 3);
-                Assert.Equal(crc2, crc1, "CRC mismatch got {0:X4} expected {1:X4}");
+                Tools.AssertEqual(crc2, crc1, "CRC mismatch got {0:X4} expected {1:X4}");
                 throw new ModbusException(response[offset + 2]);
             }
         }

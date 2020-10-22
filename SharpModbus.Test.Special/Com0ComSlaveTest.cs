@@ -8,13 +8,18 @@ namespace SharpModbus.Test.Special
         public const string SlaveCOM = "COM99";
         public const string MasterCOM = "COM98";
 
+        private SerialSettings ss(string portName)
+        {
+            return new SerialSettings { PortName = portName };
+        }
+
         [Test]
         public void TcpOverSerialTest()
         {
             var model = new ModbusModel();
             var scanner = new ModbusTCPScanner();
             using (var server = new SerialModel(SlaveCOM, model, scanner))
-            using (var stream = new ModbusSerialStream(new SerialSettings(MasterCOM), 400))
+            using (var stream = new ModbusSerialStream(ss(MasterCOM), 400))
             {
                 var master = new ModbusMaster(stream, new ModbusTCPProtocol());
                 //race condition avoided by access order
@@ -28,7 +33,7 @@ namespace SharpModbus.Test.Special
             var model = new ModbusModel();
             var scanner = new ModbusTCPScanner();
             using (var server = new SerialModel(SlaveCOM, model, scanner))
-            using (var stream = new ModbusIsolatedStream(new SerialSettings(MasterCOM), 400))
+            using (var stream = new ModbusIsolatedStream(ss(MasterCOM), 400))
             {
                 var master = new ModbusMaster(stream, new ModbusTCPProtocol());
                 //race condition avoided by access order
@@ -42,7 +47,7 @@ namespace SharpModbus.Test.Special
             var model = new ModbusModel();
             var scanner = new ModbusRTUScanner();
             using (var server = new SerialModel(SlaveCOM, model, scanner))
-            using (var master = ModbusMaster.RTU(new SerialSettings(MasterCOM)))
+            using (var master = ModbusMaster.RTU(ss(MasterCOM)))
             {
                 //race condition avoided by access order
                 H.SharedSlaveTest(model, master);
@@ -55,7 +60,7 @@ namespace SharpModbus.Test.Special
             var model = new ModbusModel();
             var scanner = new ModbusRTUScanner();
             using (var server = new SerialModel(SlaveCOM, model, scanner))
-            using (var master = ModbusMaster.IsolatedRTU(new SerialSettings(MasterCOM)))
+            using (var master = ModbusMaster.IsolatedRTU(ss(MasterCOM)))
             {
                 //race condition avoided by access order
                 H.SharedSlaveTest(model, master);
@@ -68,7 +73,7 @@ namespace SharpModbus.Test.Special
             var model = new ModbusModel();
             var scanner = new ModbusTCPScanner();
             using (var server = new SerialModel(SlaveCOM, model, scanner))
-            using (var stream = new ModbusSerialStream(new SerialSettings(MasterCOM), 400))
+            using (var stream = new ModbusSerialStream(ss(MasterCOM), 400))
             {
                 var master = new ModbusMaster(stream, new ModbusTCPProtocol());
                 var ex = Assert.Throws<ModbusException>(() => H.SharedExceptionTest(master));
@@ -83,7 +88,7 @@ namespace SharpModbus.Test.Special
             var model = new ModbusModel();
             var scanner = new ModbusTCPScanner();
             using (var server = new SerialModel(SlaveCOM, model, scanner))
-            using (var stream = new ModbusIsolatedStream(new SerialSettings(MasterCOM), 400))
+            using (var stream = new ModbusIsolatedStream(ss(MasterCOM), 400))
             {
                 var master = new ModbusMaster(stream, new ModbusTCPProtocol());
                 var ex = Assert.Throws<ModbusException>(() => H.SharedExceptionTest(master));
@@ -98,7 +103,7 @@ namespace SharpModbus.Test.Special
             var model = new ModbusModel();
             var scanner = new ModbusRTUScanner();
             using (var server = new SerialModel(SlaveCOM, model, scanner))
-            using (var master = ModbusMaster.RTU(new SerialSettings(MasterCOM)))
+            using (var master = ModbusMaster.RTU(ss(MasterCOM)))
             {
                 var ex = Assert.Throws<ModbusException>(() => H.SharedExceptionTest(master));
                 Assert.AreEqual("Modbus exception 2", ex.Message);
@@ -112,7 +117,7 @@ namespace SharpModbus.Test.Special
             var model = new ModbusModel();
             var scanner = new ModbusRTUScanner();
             using (var server = new SerialModel(SlaveCOM, model, scanner))
-            using (var master = ModbusMaster.IsolatedRTU(new SerialSettings(MasterCOM)))
+            using (var master = ModbusMaster.IsolatedRTU(ss(MasterCOM)))
             {
                 var ex = Assert.Throws<ModbusException>(() => H.SharedExceptionTest(master));
                 Assert.AreEqual("Modbus exception 2", ex.Message);

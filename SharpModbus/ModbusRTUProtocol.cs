@@ -13,7 +13,7 @@ namespace SharpModbus
         {
             var wrapped = ModbusParser.Parse(request, offset);
             var crc = ModbusHelper.CRC16(request, offset, wrapped.RequestLength);
-            Assert.Equal(crc, ModbusHelper.GetUShortLittleEndian(request, offset + wrapped.RequestLength),
+            Tools.AssertEqual(crc, ModbusHelper.GetUShortLittleEndian(request, offset + wrapped.RequestLength),
                          "CRC mismatch {0:X4} expected {1:X4}");
             return new ModbusRTUWrapper(wrapped);
         }

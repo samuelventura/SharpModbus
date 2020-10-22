@@ -35,9 +35,9 @@ namespace SharpModbus
         public object ParseResponse(byte[] response, int offset)
         {
             var bytes = ModbusHelper.BytesForBools(count);
-            Assert.Equal(response[offset + 0], slave, "Slave mismatch got {0} expected {1}");
-            Assert.Equal(response[offset + 1], 2, "Function mismatch got {0} expected {1}");
-            Assert.Equal(response[offset + 2], bytes, "Bytes mismatch got {0} expected {1}");
+            Tools.AssertEqual(response[offset + 0], slave, "Slave mismatch got {0} expected {1}");
+            Tools.AssertEqual(response[offset + 1], 2, "Function mismatch got {0} expected {1}");
+            Tools.AssertEqual(response[offset + 2], bytes, "Bytes mismatch got {0} expected {1}");
             return ModbusHelper.DecodeBools(response, offset + 3, count);
         }
 

@@ -41,7 +41,7 @@ namespace SharpModbus
         void CheckCode(byte code)
         {
             var valid = "01,02,03,04,05,06,15,16".Contains(code.ToString("00"));
-            if (!valid) Thrower.Throw("Unsupported code {0}", code);
+            if (!valid) Tools.Throw("Unsupported code {0}", code);
         }
     }
 }

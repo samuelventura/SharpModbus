@@ -20,7 +20,7 @@ namespace SharpModbus
 
         public static ModbusMaster TCP(string ip, int port, int timeout = 400)
         {
-            var socket = TcpTools.ConnectWithTimeout(ip, port, timeout);
+            var socket = Tools.ConnectWithTimeout(ip, port, timeout);
             var stream = new ModbusSocketStream(socket, timeout);
             var protocol = new ModbusTCPProtocol();
             return new ModbusMaster(stream, protocol);
@@ -37,7 +37,7 @@ namespace SharpModbus
 
         public void Dispose()
         {
-            Disposer.Dispose(stream);
+            Tools.Dispose(stream);
         }
 
         public bool ReadCoil(byte slave, ushort address)

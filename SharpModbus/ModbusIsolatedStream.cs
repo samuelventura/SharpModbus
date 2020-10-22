@@ -18,7 +18,7 @@ namespace SharpModbus
 
         public void Dispose()
         {
-            Disposer.Dispose(serialProcess);
+            Tools.Dispose(serialProcess);
         }
 
         public void Write(byte[] data)

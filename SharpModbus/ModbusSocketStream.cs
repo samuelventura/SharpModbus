@@ -19,7 +19,7 @@ namespace SharpModbus
 
         public void Dispose()
         {
-            Disposer.Dispose(socket);
+            Tools.Dispose(socket);
         }
 
         public void Write(byte[] data)
