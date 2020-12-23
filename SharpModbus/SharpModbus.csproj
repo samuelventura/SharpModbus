@@ -3,12 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net40</TargetFramework>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Version>1.0.12.0</Version>
+    <Authors>Samuel Ventura</Authors>
+    <Copyright>Copyright © Samuel Ventura 2017</Copyright>
     <PackageId>SharpModbus</PackageId>
-    <PackageVersion>1.0.12.0</PackageVersion>
     <PackageProjectUrl>https://github.com/samuelventura/SharpModbus</PackageProjectUrl>  
     <PackageLicenseExpression>MIT</PackageLicenseExpression>  
     <PackageTags>Modbus TCP RTU Master Slave Serial</PackageTags>    
-    <Authors>Samuel Ventura</Authors>
     <Description>C# Modbus Tools</Description>
   </PropertyGroup>
 
