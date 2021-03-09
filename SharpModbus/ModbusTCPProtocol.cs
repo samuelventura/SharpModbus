@@ -4,24 +4,17 @@ namespace SharpModbus
 {
     public class ModbusTCPProtocol : IModbusProtocol
     {
-        private int transactionId = 0;
+        private ushort transactionId = 0;
 
-        public int TransactionId
+        public ushort TransactionId
         {
             get { return transactionId; }
             set { transactionId = value; }
         }
 
-        private int NextTid()
-        {
-            var tid = transactionId++;
-            transactionId &= 0xFFFF;
-            return tid;
-        }
-
         public IModbusWrapper Wrap(IModbusCommand wrapped)
         {
-            return new ModbusTCPWrapper(wrapped, NextTid());
+            return new ModbusTCPWrapper(wrapped, transactionId++);
         }
 
         public IModbusWrapper Parse(byte[] request, int offset)

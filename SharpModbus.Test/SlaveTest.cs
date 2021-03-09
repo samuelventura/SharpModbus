@@ -27,10 +27,6 @@ namespace SharpModbus.Test
             master.WriteCoil(0, 0, false);
             Assert.AreEqual(1, protocol.TransactionId);
             H.SharedSlaveTest(model, master);
-            //ensure TransactionId wraps around 0xFFFF
-            protocol.TransactionId = 0xFFFF;
-            master.WriteCoil(0, 0, false);
-            Assert.AreEqual(0, protocol.TransactionId);
         }
 
         [Test]

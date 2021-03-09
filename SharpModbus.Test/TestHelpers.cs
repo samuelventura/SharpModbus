@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 using NUnit.Framework;
 
 namespace SharpModbus.Test
@@ -78,6 +79,7 @@ namespace SharpModbus.Test
         private readonly IModbusScanner scanner;
         private readonly ModbusModel model;
         private readonly TcpListener server;
+        public int delay;
 
         public TcpServerModel(ModbusModel model, IModbusScanner scanner)
         {
@@ -123,6 +125,7 @@ namespace SharpModbus.Test
                     {
                         response = cmd.GetException(2);
                     }
+                    if (delay > 0) Thread.Sleep(delay);
                     client.GetStream().Write(response, 0, response.Length);
                 }
             }

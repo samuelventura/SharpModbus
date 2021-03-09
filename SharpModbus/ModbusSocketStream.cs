@@ -24,6 +24,8 @@ namespace SharpModbus
 
         public void Write(byte[] data)
         {
+            //implicit discard to allow retry after timeout as per #5
+            while (socket.Available > 0) socket.GetStream().ReadByte();
             if (monitor != null) monitor('>', data, data.Length);
             socket.GetStream().Write(data, 0, data.Length);
         }
