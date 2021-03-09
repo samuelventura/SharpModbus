@@ -62,7 +62,7 @@ namespace SharpModbus
 
         public void CheckException(byte[] response, int count)
         {
-            if (count < 5) Tools.Throw("Partial exception packet got {0} expected >= {1}", count, 5);
+            if (count < 5) Tools.Throw("Partial packet exception got {0} expected >= {1}", count, 5);
             var offset = 0;
             var code = response[offset + 1];
             if ((code & 0x80) != 0)

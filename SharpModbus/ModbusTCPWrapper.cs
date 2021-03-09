@@ -5,17 +5,17 @@ namespace SharpModbus
     public class ModbusTCPWrapper : IModbusWrapper
     {
         private readonly IModbusCommand wrapped;
-        private readonly int transactionId;
+        private readonly ushort transactionId;
 
         public byte Code { get { return wrapped.Code; } }
         public byte Slave { get { return wrapped.Slave; } }
         public ushort Address { get { return wrapped.Address; } }
         public IModbusCommand Wrapped { get { return wrapped; } }
-        public int TransactionId { get { return transactionId; } }
+        public ushort TransactionId { get { return transactionId; } }
         public int RequestLength { get { return wrapped.RequestLength + 6; } }
         public int ResponseLength { get { return wrapped.ResponseLength + 6; } }
 
-        public ModbusTCPWrapper(IModbusCommand wrapped, int transactionId)
+        public ModbusTCPWrapper(IModbusCommand wrapped, ushort transactionId)
         {
             this.wrapped = wrapped;
             this.transactionId = transactionId;
@@ -73,7 +73,7 @@ namespace SharpModbus
 
         public void CheckException(byte[] response, int count)
         {
-            if (count < 9) Tools.Throw("Partial exception packet got {0} expected >= {1}", count, 9);
+            if (count < 9) Tools.Throw("Partial packet exception got {0} expected >= {1}", count, 9);
             var offset = 6;
             var code = response[offset + 1];
             if ((code & 0x80) != 0)
