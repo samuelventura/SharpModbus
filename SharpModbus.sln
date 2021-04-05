@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.809.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpModbus", "SharpModbus\SharpModbus.csproj", "{8018770A-60AD-498D-95C9-05DF5EBCE48F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpModbus.Test", "SharpModbus.Test\SharpModbus.Test.csproj", "{68CF8A49-A794-46BF-B772-A4CCE03D31CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpModbus.Test.Special", "SharpModbus.Test.Special\SharpModbus.Test.Special.csproj", "{F6981F50-FD7F-429A-A4CA-0CB67D17D2EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8018770A-60AD-498D-95C9-05DF5EBCE48F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8018770A-60AD-498D-95C9-05DF5EBCE48F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8018770A-60AD-498D-95C9-05DF5EBCE48F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8018770A-60AD-498D-95C9-05DF5EBCE48F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68CF8A49-A794-46BF-B772-A4CCE03D31CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68CF8A49-A794-46BF-B772-A4CCE03D31CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68CF8A49-A794-46BF-B772-A4CCE03D31CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68CF8A49-A794-46BF-B772-A4CCE03D31CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6981F50-FD7F-429A-A4CA-0CB67D17D2EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6981F50-FD7F-429A-A4CA-0CB67D17D2EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6981F50-FD7F-429A-A4CA-0CB67D17D2EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6981F50-FD7F-429A-A4CA-0CB67D17D2EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F9F59B7-5017-4EB2-B6C0-D79B9BF94ACD}
+	EndGlobalSection
+EndGlobal
