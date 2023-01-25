@@ -2,7 +2,7 @@
 using System.Threading;
 using NUnit.Framework;
 
-namespace SharpModbus.Test
+namespace SharpModbus.Test.Special
 {
     public class Opto22SnapPacTest
     {
