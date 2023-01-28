@@ -67,6 +67,8 @@ dotnet test SharpModbus.Test -v n
 #my asdf dotnet 6.0.405 complains about missing mono
 #ignore yellow stderr and stdout
 dotnet test SharpModbus.Test.Socat
+#test in release to avoid yellow output
+dotnet test SharpModbus.Test.Socat -c Release
 
 #tests below require a hard to replicate environment
 #do not bother unless really important to you

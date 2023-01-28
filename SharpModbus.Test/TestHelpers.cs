@@ -3,6 +3,7 @@ using System.Net;
 using System.Text;
 using System.IO.Ports;
 using System.Net.Sockets;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
@@ -156,7 +157,13 @@ namespace SharpModbus.Test
         {
             //use <dotnet test -v n> for console output
             try { Process(); }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { Log(ex.ToString()); }
+        }
+
+        [Conditional("DEBUG")]
+        private void Log(string line)
+        {
+            Console.WriteLine(line);
         }
 
         private void Process()

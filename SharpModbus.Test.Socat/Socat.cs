@@ -49,6 +49,7 @@ namespace SharpModbus.Test.Special
             File.Delete(Slave);
         }
 
+        [Conditional("DEBUG")]
         private void Dump(StreamReader reader)
         {
             Task.Factory.StartNew(() =>
