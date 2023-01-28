@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using NUnit.Framework;
+using SharpModbus.Serial;
 
 namespace SharpModbus.Test.Special
 {
@@ -19,11 +20,6 @@ namespace SharpModbus.Test.Special
                 BaudRate = 57600,
             };
             using (var master = ModbusMaster.RTU(settings))
-            {
-                testMaster(master);
-            }
-            Thread.Sleep(200);
-            using (var master = ModbusMaster.IsolatedRTU(settings))
             {
                 testMaster(master);
             }
@@ -75,12 +71,6 @@ namespace SharpModbus.Test.Special
             };
             //Modbus RTU over serial
             using (var master = ModbusMaster.RTU(settings))
-            {
-                master.WriteCoil(1, 3000, false);
-                master.WriteCoils(1, 3001, false, true);
-            }
-            //Modbus RTU over isolated serial
-            using (var master = ModbusMaster.IsolatedRTU(settings))
             {
                 master.WriteCoil(1, 3000, false);
                 master.WriteCoils(1, 3001, false, true);

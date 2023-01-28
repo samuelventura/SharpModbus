@@ -3,8 +3,6 @@ using System.Net.Sockets;
 
 namespace SharpModbus
 {
-    public class SerialSettings : SharpSerial.SerialSettings { }
-
     public static class Tools
     {
         public static void AssertEqual(int a, int b, string format)
@@ -23,10 +21,22 @@ namespace SharpModbus
                 socket.EndConnect(result);
                 return socket;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Tools.Dispose(socket);
-                throw ex;
+                throw;
+            }
+        }
+        
+        public static void Try(Action action)
+        {
+            try
+            {
+                action.Invoke();
+            }
+            catch (Exception)
+            {
+                //no clear use case for cleanup exception
             }
         }
 

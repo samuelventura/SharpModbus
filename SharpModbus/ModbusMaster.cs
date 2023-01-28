@@ -1,4 +1,5 @@
 ﻿using System;
+using SharpModbus.Serial;
 
 namespace SharpModbus
 {
@@ -7,13 +8,6 @@ namespace SharpModbus
         public static ModbusMaster RTU(SerialSettings settings, int timeout = 400)
         {
             var stream = new ModbusSerialStream(settings, timeout);
-            var protocol = new ModbusRTUProtocol();
-            return new ModbusMaster(stream, protocol);
-        }
-
-        public static ModbusMaster IsolatedRTU(SerialSettings settings, int timeout = 400)
-        {
-            var stream = new ModbusIsolatedStream(settings, timeout);
             var protocol = new ModbusRTUProtocol();
             return new ModbusMaster(stream, protocol);
         }

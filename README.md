@@ -16,12 +16,6 @@ using (var master = ModbusMaster.RTU(settings))
     master.WriteCoil(1, 3000, false);
     master.WriteCoils(1, 3001, false, true);
 }
-//Modbus RTU over isolated serial
-using (var master = ModbusMaster.IsolatedRTU(settings))
-{
-    master.WriteCoil(1, 3000, false);
-    master.WriteCoils(1, 3001, false, true);
-}
 //Modbus TCP over socket
 using (var master = ModbusMaster.TCP("10.77.0.2", 502))
 {
@@ -37,15 +31,21 @@ No documentation yet. Resort to tests at SharpModbus.Test and SharpModbus.Test.S
 
 ## Development Setup
 
+Setup 1
 - Windows 10 Pro 64x (Windows only)
 - VS Code (bash terminal from Git4Win)
-- Net Core SDK 3.1.201
+- .NET SDK 6.0.405
 - com0com-2.2.2.0-x64-fre-signed COM98/99
 - For Comfile Modport Test
   - FTDI USB-RS485-WE-1800-BT COM3
   - Comfile MD-H485+MD-DOSO8+5SlotBoard
   - CUI SWI25-24-N-P5
   - B&B BB-UH401 
+
+Setup 2
+- Mac mini - Ventura 13.1
+- VS Code 1.74.3
+- .NET SDK 6.0.405 + 7.0.2
 
 ## Development CLI
 
