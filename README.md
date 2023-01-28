@@ -65,12 +65,14 @@ dotnet test SharpModbus.Test
 dotnet test SharpModbus.Test -v n
 
 #com0com based serial test for Windows
+#com0com pair required as COM98 and COM99
 #ignore yellow stderr and stdout
 dotnet test SharpModbus.Test.Com0com
 #test in release to avoid yellow output
 dotnet test SharpModbus.Test.Com0com -c Release
 
 #socat based serial test for MacOS/Linux
+#brew install socat
 #my asdf dotnet 6.0.405 complains about missing mono
 #ignore yellow stderr and stdout
 dotnet test SharpModbus.Test.Socat
@@ -80,8 +82,6 @@ dotnet test SharpModbus.Test.Socat -c Release
 #tests below require a hard to replicate environment
 #do not bother unless really important to you
 
-#com0com test cases need COM98 and COM99
-dotnet test SharpModbus.Test.Special --filter FullyQualifiedName~Com0ComSlaveTest
 #comfile modport connected on COM10 see details inside
 dotnet test SharpModbus.Test.Special --filter FullyQualifiedName~ComfileModportTest
 #opto22 snappac connected on 10.77.0.2:502 see details inside
