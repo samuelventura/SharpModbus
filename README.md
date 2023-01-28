@@ -47,6 +47,11 @@ Setup 2
 - VS Code 1.74.3
 - .NET SDK 6.0.405 + 7.0.2
 
+Setup 3
+- kubuntu 20.04
+- VS Code 1.74.2
+- asdf dotnet 6.0.405
+
 ## Development CLI
 
 ```bash
@@ -57,6 +62,15 @@ dotnet pack SharpModbus -c Release
 dotnet test SharpModbus.Test
 #console output for test cases
 dotnet test SharpModbus.Test -v n
+
+#socat based serial test for MacOS/Linux
+#my asdf dotnet 6.0.405 complains about missing mono
+#ignore yellow stderr and stdout
+dotnet test SharpModbus.Test.Socat
+
+#tests below require a hard to replicate environment
+#do not bother unless really important to you
+
 #com0com test cases need COM98 and COM99
 dotnet test SharpModbus.Test.Special --filter FullyQualifiedName~Com0ComSlaveTest
 #comfile modport connected on COM10 see details inside
@@ -67,8 +81,8 @@ dotnet test SharpModbus.Test.Special --filter FullyQualifiedName~Opto22SnapPacTe
 dotnet build SharpModbus.Test.Special
 ```
 
-## TODO
+## Roadmap
 
-- [ ] Support Linux / macOS
+- [x] Support Linux/MacOS
 - [ ] Improve documentation and samples
 - [ ] Support Modbus ASCII
