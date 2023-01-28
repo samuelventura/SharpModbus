@@ -32,11 +32,12 @@ No documentation yet. Resort to tests at SharpModbus.Test and SharpModbus.Test.S
 ## Development Setup
 
 Setup 1
-- Windows 10 Pro 64x (Windows only)
-- VS Code (bash terminal from Git4Win)
+- Windows 10 Pro 64x VM
+- VirtualBox 7.0.6 on Kubuntu 20.04
+- VS Code 1.74.3
 - .NET SDK 6.0.405
 - com0com-2.2.2.0-x64-fre-signed COM98/99
-- For Comfile Modport Test
+- For Special Test subproject
   - FTDI USB-RS485-WE-1800-BT COM3
   - Comfile MD-H485+MD-DOSO8+5SlotBoard
   - CUI SWI25-24-N-P5
@@ -48,7 +49,7 @@ Setup 2
 - .NET SDK 6.0.405 + 7.0.2
 
 Setup 3
-- kubuntu 20.04
+- Kubuntu 20.04
 - VS Code 1.74.2
 - asdf dotnet 6.0.405
 
@@ -62,6 +63,12 @@ dotnet pack SharpModbus -c Release
 dotnet test SharpModbus.Test
 #console output for test cases
 dotnet test SharpModbus.Test -v n
+
+#com0com based serial test for Windows
+#ignore yellow stderr and stdout
+dotnet test SharpModbus.Test.Com0com
+#test in release to avoid yellow output
+dotnet test SharpModbus.Test.Com0com -c Release
 
 #socat based serial test for MacOS/Linux
 #my asdf dotnet 6.0.405 complains about missing mono
@@ -85,6 +92,6 @@ dotnet build SharpModbus.Test.Special
 
 ## Roadmap
 
-- [x] Support Linux/MacOS
+- [x] Support Linux/MacOS as well
 - [ ] Improve documentation and samples
 - [ ] Support Modbus ASCII
