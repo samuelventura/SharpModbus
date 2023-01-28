@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using SharpModbus.Serial;
 
-namespace SharpModbus.Test.Special
+namespace SharpModbus.Test.Windows
 {
     public class Com0ComSlaveTest
     {

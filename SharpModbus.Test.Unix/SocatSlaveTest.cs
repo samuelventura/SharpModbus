@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using SharpModbus.Serial;
 
-namespace SharpModbus.Test.Special
+namespace SharpModbus.Test.Unix
 {
     public class SocatSlaveTest
     {

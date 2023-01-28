@@ -61,23 +61,24 @@ dotnet clean SharpModbus -c Release
 dotnet pack SharpModbus -c Release
 #cross platform test cases
 dotnet test SharpModbus.Test
+#avoid complains on missing mono on MacOS/Linux
+dotnet test SharpModbus.Test -f net6.0
 #console output for test cases
 dotnet test SharpModbus.Test -v n
 
 #com0com based serial test for Windows
 #com0com pair required as COM98 and COM99
 #ignore yellow stderr and stdout
-dotnet test SharpModbus.Test.Com0com
+dotnet test SharpModbus.Test.Windows
 #test in release to avoid yellow output
-dotnet test SharpModbus.Test.Com0com -c Release
+dotnet test SharpModbus.Test.Windows -c Release
 
 #socat based serial test for MacOS/Linux
 #brew install socat
-#my asdf dotnet 6.0.405 complains about missing mono
 #ignore yellow stderr and stdout
-dotnet test SharpModbus.Test.Socat
+dotnet test SharpModbus.Test.Unix
 #test in release to avoid yellow output
-dotnet test SharpModbus.Test.Socat -c Release
+dotnet test SharpModbus.Test.Unix -c Release
 
 #tests below require a hard to replicate environment
 #do not bother unless really important to you

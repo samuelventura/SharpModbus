@@ -7,7 +7,7 @@ using NUnit.Framework;
 using SharpModbus.Serial;
 using SharpModbus;
 
-namespace SharpModbus.Test.Special
+namespace SharpModbus.Test.Unix
 {
     public class Socat: IDisposable
     {
